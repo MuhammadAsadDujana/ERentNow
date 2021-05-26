@@ -1,0 +1,296 @@
+﻿
+@{
+    ViewBag.Title = "CheckOut";
+}
+
+
+<section class="about-nav mt-5">
+    <div class="container">
+        <div class="row">
+            <form id="ReservationForm">
+                @Html.AntiForgeryToken()
+                <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                    <h2>contract # <output>@ViewBag.PO</output></h2>
+
+                </div>
+                <div id="CartCon" class="col-lg-12 col-md-12 col-sm-12 col-12 mt-5">
+
+                </div>
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-12 mt-0" style="position: relative;">
+                        <label class="qc pb-2" style="left: 0px">INSURANCE</label><br>
+                        <input class="up-load-b" id="uploadFile" placeholder="attach your insurance doc" disabled="disabled" />
+                        <div class="attac">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="25px">
+                                <image opacity="0.702" x="0px" y="0px" width="24px" height="25px" xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAZCAMAAAAc9R5vAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAA8FBMVEUdHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR4dHR7///+6AJgYAAAAT3RSTlMAJ4OvsJA/QKJkX5WzbAGyhQtiSgeJoUgZRBulAggWTY2fajdppn0EDQ+UZkMaA26rEgWRrTZ0oHY7W1YscylyiJZFNVSHDnwMhmNYqXAeci/ctQAAAAFiS0dET25mQUkAAAAHdElNRQflAx8PNQv7OEGLAAAA50lEQVQoz33R2VbCQBAE0IKgwNhMCMgmYQviGgQkLkSRRUFR8f8/h4nEkxkSrIfuPvexC1ATi2uJg0OEkkyk0uyIMnzX9awB8BzlQ37sbV4o8igHSlSOdFToJPB84DxeNQMn4bX6782oobrRbG3d4qbqWtv30060W8R8PzvHxR6/vPrP+bXktuSW5F0tK/tNxnf0+gPcDp073+//HA+P4ks0CjnIBZ7I8DwnO5w08EzjlwkxU3ZMZ6ITppPuCnelFmyai1l+rQt/k2szF9rc63H5rjrwsaLZ59fkW29gJ9xeOFRc/6i6AU72HYwMhR7wAAAAAElFTkSuQmCC" />
+                            </svg>
+                        </div>
+                        <div class="fileUpload btn btn-primary submit-b mt-0">
+                            <span>Upload</span>
+                            <input id="uploadBtn" type="file" name="InsuranceFile" class="upload" />
+                        </div>
+                    </div>
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-12 mt-5">
+                        <p>(Optional)</p>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-12 mt-3 ms-auto">
+                        <div class="row pe-0 ps-0">
+                            <div class="col-md-8">
+                                <p class="up-j">Total Rent Price: <span id="TotalPrice"></span></p>
+                            </div>
+                            <div class="col-md-3 pb-5">
+                                <input type="hidden" value="@ViewBag.PO" name="CustomerPO" />
+                                <input type="hidden" name="TotalRentAmount" />
+                                <input type="submit" class="btn btn-primary submit-b pb-3 pt-3" value="RENT" />
+                                @*<a class="btn btn-primary submit-b pb-3 pt-3" href="#" id="BtnRent" role="button">RENT</a>*@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-12 mt-0">
+                        <label class="qc pb-2" style="left: 0px">COMMENTS</label><br>
+                        <textarea name="Comments" class="form-control"></textarea>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<script>
+
+    $(function () {
+
+        debugger
+        var data = localStorage.getItem('@Session["UserID"]');
+        var JsonArr = JSON.parse('['+data+']')
+        //try {
+
+        //} catch (err) {
+
+        //}
+        LoadCartData(JsonArr)
+    })
+
+    function LoadCartData(JsonArr) {
+        $.post("/User/GetCartData", { input: JSON.stringify(JsonArr) }).done(function (resp) {
+            debugger
+            if (resp.isSuccess) {
+                var TotalPrice = 0;
+                var html = '';
+                $('#CartCon').html('');
+                for (var i = 0; i < resp.data.length; i++) {
+
+                    html = ModelHtml(i, resp.data[i].ModelID, resp.data[i].ForkliftsCharges, resp.data[i].Picture, resp.data[i].Make, resp.data[i].Model, resp.data[i].Capacity, resp.data[i].Description, resp.data[i].Quantity, moment(resp.data[i].StartDate).format('MM/DD/yyyy'), moment(resp.data[i].ReturnDate).format('MM/DD/yyyy'), resp.data[i].PricingStandard_Daily, resp.data[i].PricingStandard_Weekly, resp.data[i].PricingStandard_Montly, resp.data[i].PurchasePrice, '', '');
+                    $('#CartCon').append(html);
+                    TotalPrice += parseInt(resp.data[i].PurchasePrice);
+                    $('#Qty' + i).val(resp.data[i].Quantity);
+
+                    $('#StartDate'+i).datepicker({
+                        format: 'mm-dd-yyyy'
+                    });
+
+                    $('#ReturnDate'+i).datepicker({
+                        format: 'mm-dd-yyyy'
+                    });
+                }
+
+                $('#TotalPrice').html('$' + TotalPrice);
+                $('[name= TotalRentAmount]').html('$' + TotalPrice);
+
+                debugger
+                localStorage.removeItem('@Session["UserID"]');
+                if (resp.CartData.length > 0) {
+                    $('#ForkliftsModelId').val(resp.CartData)
+                    var JsonStr = JSON.stringify(resp.CartData)
+                    localStorage.setItem('@Session["UserID"]', JsonStr.substring(1, JsonStr.length - 1) );
+                }
+            } else {
+                toastr["error"](resp.msg)
+            }
+
+        }).fail(function (data) {
+            console.log(data)
+        });
+    }
+
+    $(document).on('click', "#BtnDelete", function (e) {
+        debugger
+
+        var index = $(this).data('index')
+        var CartDataStr = localStorage.getItem('@Session["UserID"]');
+        var CartDataJson = JSON.parse('[' + CartDataStr + ']')
+        CartDataJson.splice(index, 1);
+
+        localStorage.clear();
+        var JsonStr = JSON.stringify(CartDataJson)
+        if (CartDataJson.length > 0) {
+
+            localStorage.setItem('@Session["UserID"]', JsonStr.substring(1, JsonStr.length - 1));
+        }
+        LoadCartData(CartDataJson)// to be tested
+    })
+
+    $(document).on('submit', "#ReservationForm", function (e) {
+        e.preventDefault();
+        var formData = new FormData(this);
+
+        $.ajax({
+            url: '/User/AddReservation',
+            type: "POST",
+            dataType: "JSON",
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (resp) {
+                if (resp.isSuccess) {
+                    toastr["success"](resp.msg)
+                }
+                else {
+                    toastr["error"](resp.msg)
+                }
+            }
+        });
+    })
+
+
+    function ModelHtml(index, ModelID, ForkliftsCharges,Picture,Make, Model, Capacity, Description, Qty, StartDate, ReturnDate, Daily, Weekly, Monthly, PurchasePrice, Transportation, Location) {
+        var html = '';
+
+        html += ' <div class="row">';
+        html += '   <div class="col-lg-4 col-md-4 col-sm-4 col-12">';
+        html += '      <img src="' + Picture + '" width="100%">';
+        html += '          </div>';
+        html += '      <div class="col-lg-8 col-md-8 col-sm-8 col-12">';
+        html += '    <div class="mg-detail">';
+        html += '        <div class="model-group-inner-bg m-b-n-n b-o-x">';
+        html += '            <h2>' + Make + ',' + Model + ',' + Capacity + '</h2>';
+        html += '            <input type="hidden" name="ReservationDtls[' + index + '].ForkliftsModelId" value="' + ModelID + '"/>';
+        html += '            <a id="BtnDelete" data-index="'+index+'" href="#"><i class="fa fa-trash-alt fa-2x" style="color:#da3a3a;float:right"></i></a>';
+        html += '            <p>' + Description + '</p>';
+        html += '            <div class="row mt-5">';
+        html += '                <div class="col-md-6">';
+        html += '                    <div class="col-md-4 ps-3 d-flex">';
+        html += '                        <label class="qc ps-2">QTY</label>';
+        html += '                        <input type="number" name="ReservationDtls[' + index + '].Quantity" id="Qty' + index + '" class="form-control" />';
+        html += '                    </div>';
+        html += '                    <div class="row">';
+        html += '                        <div class="col-md-12  mt-4">';
+        html += '                            <div class="well">';
+        html += '                                <div class="input-append date">';
+        html += '                                    <label>';
+        html += '                                        Start Date';
+        html += '                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22px" height="22px" class="ms-4 me-3">';
+        html += '                                                <image x="0px" y="0px" width="22px" height="22px" xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAMAAADzapwJAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAilBMVEUrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7b///+54bdhAAAALHRSTlMAJP1siOXs8+eK8Ax34FT+weSwbdBfaZCAjxtAFhlMRzpwMTYoUCIlW1izmri4XQMAAAABYktHRC3N2kE9AAAAB3RJTUUH5QMMFAcdsEMUSwAAALZJREFUGNOd0NkKwjAQheHfve46RqPGLda41Hn/51NrWxQriCcQOB/DXAxQqWqNPHmpN5qqrShPWhptOt2ear+YTku3Q8RgOBwV/CzR/ZXkK4+lJGOkbFoePDFmCjNjZjA1ZpKxVZ2nv4V5+r/wQnXxxkvnVrB2bg0r55YZb6x1sLV2C87azS+7P3jn/R5i72PYe7/L+BDCEU4hnOAYwuGv3WeRABeRCwSR84OTslMlXJPPuybXG9rXGoRxskSYAAAAAElFTkSuQmCC" />';
+        html += '                                            </svg>';
+        html += '                                        </label>';
+        html += '                                <input type="text" name="ReservationDtls[' + index + '].StartDate" class="span2" value="' + StartDate + '" id="StartDate' + index + '">';
+        html += '                                    </div>';
+        html += '                            </div>';
+        html += '                        </div>';
+        html += '                        <div class="col-md-12  mt-4">';
+        html += '                            <div class="well">';
+        html += '                                <div class="input-append date">';
+        html += '                                    <label class="font-weight-bold">';
+        html += '                                        Return Date';
+        html += '                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22px" height="22px" class="ms-2 me-3">';
+        html += '                                                <image x="0px" y="0px" width="22px" height="22px" xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAMAAADzapwJAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAilBMVEUrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7b///+54bdhAAAALHRSTlMAJP1siOXs8+eK8Ax34FT+weSwbdBfaZCAjxtAFhlMRzpwMTYoUCIlW1izmri4XQMAAAABYktHRC3N2kE9AAAAB3RJTUUH5QMMFAcdsEMUSwAAALZJREFUGNOd0NkKwjAQheHfve46RqPGLda41Hn/51NrWxQriCcQOB/DXAxQqWqNPHmpN5qqrShPWhptOt2ear+YTku3Q8RgOBwV/CzR/ZXkK4+lJGOkbFoePDFmCjNjZjA1ZpKxVZ2nv4V5+r/wQnXxxkvnVrB2bg0r55YZb6x1sLV2C87azS+7P3jn/R5i72PYe7/L+BDCEU4hnOAYwuGv3WeRABeRCwSR84OTslMlXJPPuybXG9rXGoRxskSYAAAAAElFTkSuQmCC" />';
+        html += '                                            </svg>';
+        html += '                                        </label>';
+        html += '                                <input type="text" name="ReservationDtls[' + index + '].ReturnDate" class="span2" value="' + ReturnDate + '" id="ReturnDate' + index + '">';
+        html += '                                    </div>';
+        html += '                            </div>';
+        html += '                        </div>';
+        html += '                    </div>';
+        html += '                </div>';
+        html += '                <div class="col-md-4 ms-auto">';
+        html += '                    <div class="row">';
+        html += '                        <div class="col-4 pe-0 ps-0">';
+        html += '                            <div class="clan-tim">';
+        html += '                                <h2>Daily</h2>';
+        html += '                                <h3>' + Daily + '</h3>';
+        html += '                            </div>';
+        html += '                        </div>';
+        html += '                        <div class="col-4 pe-0 ps-0">';
+        html += '                            <div class="clan-tim">';
+        html += '                                <h2>Weekly</h2>';
+        html += '                                <h3>' + Weekly + '</h3>';
+        html += '                            </div>';
+        html += '                        </div>';
+        html += '                        <div class="col-4 pe-0 ps-0">';
+        html += '                            <div class="clan-tim">';
+        html += '                                <h2>Monthly</h2>';
+        html += '                                <h3>' + Monthly + '</h3>';
+        html += '                            </div>';
+        html += '                        </div>';
+        html += '                    </div>';
+        html += '                    <div class="col-md-12">';
+        html += '                        <input type="hidden" name="ReservationDtls[' + index + '].RentPrice" value="' + PurchasePrice + '"/>';
+        html += '                        <p class="up-j" style="text-align: right !important">Rent Price: <span>$ ' + PurchasePrice + '</span></p>';
+        html += '                    </div>';
+        html += '                </div>';
+        html += '            </div>';
+        html += '            <div class="row">';
+        html += '                <div class="col-md-4 ps-3 pt-4">';
+        html += '                    <label class="qc pb-2" style="left: 0">TRANSPORTATION</label>';
+        html += '                    <select class="form-select" aria-label="Default select example">';
+        html += '                        <option selected>Pick up at Dealership 00:00</option>';
+        html += '                        <option value="1">Pick up at Dealership 00:10</option>';
+        html += '                        <option value="2">Pick up at Dealership 00:15</option>';
+        html += '                        <option value="3">Pick up at Dealership 00:20</option>';
+        html += '                    </select>';
+        html += '                </div>';
+        html += '                <div class="col-md-3 ps-3 pt-4">';
+        html += '                    <label class="qc pb-2" style="left: 0">LOCATION</label>';
+        html += '                    <select name="ReservationDtls[' + index + '].Location" class="form-select" aria-label="Default select example">';
+        html += '                        <option selected>Worksite 1</option>';
+        html += '                        <option value="1">Worksite 2</option>';
+        html += '                        <option value="2">Worksite 3</option>';
+        html += '                        <option value="3">Worksite 4</option>';
+        html += '                    </select>';
+        html += '                </div>';
+        html += '            </div>';
+        html += '        </div>';
+        html += '  <div class="row">';
+        html +=         ModelChargesHtml(ForkliftsCharges)
+        html += '  </div>';
+        html += '</div>';
+        html += '</div>';
+        html += '</div><div class="bor"></div>';
+
+        return html;
+    }
+
+    function ModelChargesHtml(ForkliftsCharges) {
+        var html = '';
+        html += '       <div class="col-md-4 ps-4 pt-1">';
+        html += '               <label class="qc pb-2" style="left: -11px">FEE</label>';
+        html += '                <div class="row">';
+        html += '                     <table class="table table-bordered clan-tim">';
+        html += '                           <tr>';
+        html += '                                   <td>';
+        html += '                                       <h2 class="clan-tim-bg">Charge</h2>';
+        html += '                                   </td>';
+        html += '                                   <td>';
+        html += '                                       <h2 class="clan-tim-bg">Amount</h2>';
+        html += '                                   </td>';
+        html += '                           </tr>';
+        for (var i = 0; i < ForkliftsCharges.length; i++) {
+            html += '                           <tr>';
+            html += '                                   <td>';
+            html += '                                       <h4>' + ForkliftsCharges[i].ChargesName+'</h4>';
+            html += '                                   </td>';
+            html += '                                   <td>';
+            html += '                                       <h4>' + ForkliftsCharges[i].Amount +'</h4>';
+            html += '                                   </td>';
+            html += '                           </tr>';
+        }
+        html += '                       </table>';
+        html += '                </div>';
+        html += '       </div>';
+        return html;
+    }
+
+</script>

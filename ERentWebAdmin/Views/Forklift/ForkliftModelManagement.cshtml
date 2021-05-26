@@ -1,0 +1,240 @@
+﻿@model IEnumerable<Core.Model.ForkliftsModel>
+
+@{
+    ViewBag.Title = "ForkliftModelManagement";
+}
+
+
+<style>
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+    }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+    input:checked + .slider {
+        background-color: #2196F3;
+        /*background-color: 003399;*/
+    }
+
+    input:focus + .slider {
+        box-shadow: 0 0 1px #2196F3;
+    }
+
+    input:checked + .slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+        border-radius: 34px;
+    }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+</style>
+
+<div class="content setTop-margin">
+    <div class="container-fluid px-4">
+
+
+        <div class="content-header">
+            <div class="input-group searchGroup col-md-4">
+            </div>
+            <a href="~/Forklift/CreateForkliftModel" class="btn btn-success"><i class="fas fa-plus-circle"></i> Add New Forklift Model</a>
+        </div>
+
+        <div class="main_table">
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="card p-3">
+                        <!-- /.card-header -->
+                        <div class="card-body physicians-table table-responsive p-0">
+                            <table id="table" class="table table-hover text-center">
+                                <thead>
+                                    <tr class="bg-grey">
+
+                                        <th>Forklift picture</th>
+                                        <th>Make</th>
+                                        <th>Capacity</th>
+                                        <th>Model</th>
+                                        <th>MaxMeter</th>
+                                        <th>Title</th>
+                                        <th>PurchasePrice</th>
+                                        <th>Quantity</th>
+                                        <th>CreatedOn</th>
+                                        <th>Status</th>
+                                        @*<th>Change status</th>*@
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="myTable">
+                                    @if (Model != null)
+                                    {
+                                        foreach (var item in Model)
+                                        {
+                                    <tr>
+
+                                        <td>
+                                            @if (!String.IsNullOrEmpty(item.Picture))
+                                            {
+                                                <div class="user-block user-image">
+                                                    @*<img class="img-circle img-bordered-sm" src="@Url.Content(TripleDESCryptography.Decrypt(item.ProfileImage))" height="100" />*@
+                                                    <img class="img-circle img-bordered-sm" src="@Url.Content(item.Picture)" height="100" />
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="user-block user-image">
+                                                    <img class="img-circle img-bordered-sm" src="~/Content/theme/img/profileeee.jpg" alt="User Image" />
+                                                </div>
+                                            }
+
+                                        </td>
+                                        <td>@item.Make</td>
+                                        <td>@item.Capacity</td>
+                                        <td>@item.Model</td>
+                                        <td>@item.MaxMeter</td>
+                                        <td>@item.Title</td>
+                                        <td>@item.PurchasePrice</td>
+                                        <td>@item.Quantity</td>
+                                        <td>@item.CreatedOn</td>
+
+
+                                        @if (item.IsActive == true)
+                                        {
+                                            <td>Active</td>
+                                        }
+                                        else
+                                        {
+                                            <td>In active</td>
+                                        }
+
+                                        <td>
+
+                                            <label class="switch">
+                                                @if (item.IsActive == true)
+                                                {
+                                                    <input data-id="@item.Id" class="chkitem" name="chkitem" id="cbxVerified" value="@item.Id" type="checkbox" checked>
+                                                }
+                                                else
+                                                {
+                                                    <input data-id="@item.Id" class="chkitem" name="chkitem" id="cbxVerified" value="@item.Id" type="checkbox">
+                                                }
+                                                <span class="slider round"></span>
+                                            </label>
+
+                                        </td>
+                                        <td><a href="~/Forklift/ViewForkliftModel?forkliftModelId=@item.Id" class="view-btn"><i class="fas fa-eye"></i></a></td>
+
+                                        @if (User.IsInRole("Admin"))
+                                        {
+                                            <td><a href="~/Forklift/EditForkliftModel?forkliftModelId=@item.Id" class="view-btn"><i class="fas fa-edit"></i></a></td>
+                                            <td><a href="javascript:dataAccess.forkliftService.DeleteForkliftModel(@item.Id)" class="view-btn"><i class="fas fa-trash-alt"></i></a></td>
+                                        }
+
+                                    </tr>
+                                        }
+                                    }
+
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div>
+        </div>
+        <!-- row -->
+    </div><!-- /.container-fluid -->
+    <!-- /.content -->
+</div>
+
+
+<script>
+
+
+
+    $('.chkitem').click(function () {
+
+        debugger;
+        //alert(2);
+        const previousCheckboxValue = this; //
+        //var UserId = $(this).attr("data-id");
+
+        if ($(this).is(':checked')) {
+
+            //  var remember = $('#cbxVerified').prop('checked') ? true : false;
+            var Status = true;
+            var ForkliftId = $(this).attr("data-id");
+            //    alert("is checked");
+
+            dataAccess.forkliftService.ChangeForkLiftModelStatus(ForkliftId, Status, previousCheckboxValue);
+
+        } else {
+
+            // var remember = $('#cbxVerified').prop('checked') ? true : false;
+            var Status = false;
+            var ForkliftId = $(this).attr("data-id");
+            //  alert("not checked");
+
+            dataAccess.forkliftService.ChangeForkLiftModelStatus(ForkliftId, Status, previousCheckboxValue);
+        }
+
+    });
+
+
+
+
+
+    $(document).ready(function () {
+
+
+        $('#table').DataTable({
+            //"scrollY": "68vh",
+            //"scrollCollapse": false,
+            "searching": true,
+            //"paging": true,
+            autoWidth: true,
+            responsive: true
+        });
+    });
+
+</script>

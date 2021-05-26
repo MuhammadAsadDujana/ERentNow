@@ -1,0 +1,79 @@
+﻿
+@{
+    ViewBag.Title = "CheckOut";
+}
+
+<link href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" rel="stylesheet">
+
+<section class="about-nav mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                <h2>billing history</h2>
+            </div>
+
+            <div class="b-his mt-4">
+                <table id="TblBilling" class="table table-striped">
+                    <thead class="hb">
+                        <tr>
+                            <th scope="col">Purchase Order #</th>
+                            <th scope="col">Order Date</th>
+                            <th scope="col">Total Rent Price</th>
+                            <th scope="col"> Action </th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+
+
+        </div>
+    </div>
+</section>
+
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script>
+    $(function () {
+        debugger
+        GetBilling();
+    });
+
+    function GetBilling() {
+
+        var tbl = $('#TblBilling').DataTable({
+                "processing": true,
+                "ordering": true,
+                "serverSide": true,
+                "paging": true,
+                "pagingType": "full_numbers",
+                "keys": true,
+                "language": {
+                    "infoFiltered": ""
+                },
+                "ajax": {
+                    "url": "/User/GetBilling",
+                    @*"data": { Key : ''}*@
+                },
+                "columns": [
+                    { "data": "CustomerPO" },
+                    {
+                        "data": "CreatedOn", "render": function (data, type, row) {
+                            if ((data != undefined) && (data != ""))
+                                return moment(data).format('DD/MM/YYYY');
+                            else
+                                return "";
+                        }
+                    },
+                    { "data": "TotalRentAmount" },
+                    {
+                        "data": "Actions", "render": function (data, type, row) {
+                            debugger
+                            return "<a style='cursor:pointer' href='/User/ReservationDtl/" + row.id + "' class='btn btn-default'> <i class='fa fa-eye'></i></a>";
+                        }
+                    }
+                ],
+            });
+
+
+            var dsas = tbl;
+    }
+</script>

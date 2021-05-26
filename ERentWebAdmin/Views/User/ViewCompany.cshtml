@@ -1,0 +1,154 @@
+﻿@model Core.Model.CompanySetupPage
+
+@{
+    ViewBag.Title = "ViewCompany";
+}
+
+
+<link href="~/Content/theme/css/select2.min.css" rel="stylesheet" />
+<link href="~/Content/theme/css/select2-bootstrap4.min.css" rel="stylesheet" />
+
+<style>
+    #imageUpload {
+        display: none;
+    }
+
+    #profileImage {
+        cursor: pointer;
+    }
+
+    #profile-container {
+        width: 150px;
+        height: 150px;
+        overflow: hidden;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        -ms-border-radius: 50%;
+        -o-border-radius: 50%;
+        border-radius: 50%;
+        border: 2px solid #cacaca;
+    }
+
+        #profile-container img {
+            width: 150px;
+            height: 150px;
+        }
+</style>
+
+<!-- Main content -->
+<div class="content pt-3">
+    <div class="container-fluid px-4">
+        <div class="row">
+
+            <div class="col-md-12">
+
+                <form id="myfrm" enctype="multipart/form-data">
+
+                    <input id="txtCompanyId" value="@Model.Id" type="hidden">
+                    <input id="txtProfileLogo" value="@Model.Logo" type="hidden">
+
+                    <div class="row mb-3 pb-3">
+                        <div class="col-lg-2">
+                            <div class="image_wrap">
+                                @if (!String.IsNullOrEmpty(Model.Logo))
+                                {
+
+                                    <div id="profile-container">
+                                        <image id="setImage" src="@Url.Content(Model.Logo)" class="img-fluid" alt="" />
+                                    </div>
+                                }
+                                else
+                                {
+
+                                    <div id="profile-container">
+                                        <image id="setImage" src="~/Content/theme/img/profile.png" class="img-fluid" alt="" />
+                                    </div>
+                                }
+                                <input id="imageUpload" type="file"
+                                       name="imageUpload" placeholder="Photo" accept="image/*">
+
+                                @*<div class="profile_btn_group">
+                                    <span id="profileImage" class="btnLink profile_upload_btn">
+                                        <i class="fas fa-camera"></i>
+                                    </span>
+                                </div>*@
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.row -->
+                    <!-- row -->
+                    <div class="profile-form mb-5">
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Header</label>
+                                    <textarea readonly required class="form-control" id="txtAreaHeader" name="Text1" cols="40" rows="4">@Model.Header</textarea>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Footer</label>
+                                    <input readonly required value="@Model.Footer" id="txtFooter" type="text" class="form-control" name="" placeholder="John">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Banner Message</label>
+                                    <input readonly required value="@Model.BannerMassage" id="txtBannerMessage" type="text" class="form-control" name="" placeholder="John">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Terms of use</label>
+                                    <textarea readonly required class="form-control" id="txtAreaTermsOfUse" name="Text1" cols="40" rows="6">@Model.TermsOfUse</textarea>
+
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label>Privacy policy</label>
+                                    <textarea readonly required class="form-control" id="txtAreaPrivacypolicy" name="Text1" cols="40" rows="8">@Model.PrivacyPolicy</textarea>
+
+                                </div>
+
+                            </div>
+
+
+
+                        </div>
+
+
+
+                        <div class="row">
+
+                            <div class="col-md-6">
+
+                                <div class="separator"></div>
+                                <div class="form-group">
+                                    <label id="ErrorMessage" style="color: red;"></label>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                        <div class="buttons-group text-center mt-4">
+                            <a href="~/User/CompanyProfileManagement" class="btn mr-2">Cancel</a>
+                            <a href="~/User/EditCompany?companyId=@Model.Id" class="btn flat-btn ml-2">CLick to edit</a>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+        <!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content -->
+<script src="~/Content/theme/js/select2.full.min.js"></script>
+
+

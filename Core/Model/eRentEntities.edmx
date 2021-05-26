@@ -1,0 +1,1826 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="eRentModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CompanySetupPage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="Logo" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Header" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Footer" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="BannerMassage" Type="nvarchar(max)" />
+          <Property Name="TermsOfUse" Type="nvarchar(max)" />
+          <Property Name="PrivacyPolicy" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Url" Type="nvarchar" MaxLength="150" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedBy" Type="int" Nullable="false" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="equipmentDetail">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReservationID" Type="int" />
+          <Property Name="modelGroup" Type="int" />
+          <Property Name="equipmentGroup" Type="int" />
+          <Property Name="quantity" Type="int" />
+          <Property Name="startDate" Type="date" />
+          <Property Name="returnDate" Type="date" />
+          <Property Name="dailyRate" Type="money" />
+          <Property Name="weeklyRate" Type="money" />
+          <Property Name="monthlyRate" Type="money" />
+          <Property Name="transportation" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="feesDetail">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="equipmentDetailID" Type="int" />
+          <Property Name="charge" Type="nvarchar" MaxLength="50" />
+          <Property Name="amount" Type="money" />
+        </EntityType>
+        <EntityType Name="Forklifts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Picture" Type="nvarchar(max)" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedBy" Type="int" Nullable="false" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ForkliftsModel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ForkliftsId" Type="int" Nullable="false" />
+          <Property Name="Picture" Type="nvarchar(max)" />
+          <Property Name="Make" Type="nvarchar" MaxLength="200" />
+          <Property Name="Capacity" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Model" Type="nvarchar" MaxLength="50" />
+          <Property Name="MaxMeter" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Title" Type="nvarchar(max)" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="RentPrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="PurchasePrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="PricingStandard_Daily" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="PricingStandard_Weekly" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="PricingStandard_Montly" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="PricingNationalAccount_Daily" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="PricingNationalAccount_Weekly" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="PricingNationalAccount_Montly" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedBy" Type="int" Nullable="false" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ForkliftsModelCharges">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ForkliftsModelId" Type="int" Nullable="false" />
+          <Property Name="ChargesName" Type="nvarchar" MaxLength="100" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ForkliftsModelTransportation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ForkliftsModelId" Type="int" Nullable="false" />
+          <Property Name="PickUpFees" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="DropOff_PickUp_Fees" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="DropOffOnly" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="PickUpOnly" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="LossDamageWaiver" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Mapping_ForkliftsModelCharges_Reservation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ForkliftsModelChargesId" Type="int" Nullable="false" />
+          <Property Name="ReservationId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Mapping_ForkliftsModelTransportation_Reservation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ForkliftsModelTransportationId" Type="int" Nullable="false" />
+          <Property Name="ReservationId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Mapping_PricingNationalAccount_Reservation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PricingNationalAccountId" Type="int" Nullable="false" />
+          <Property Name="ReservationId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Mapping_PricingStandard_Reservation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PricingStandardId" Type="int" Nullable="false" />
+          <Property Name="ReservationId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="NotificationId" />
+          </Key>
+          <Property Name="NotificationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="FCMToken" Type="nvarchar(max)" />
+          <Property Name="Title" Type="nvarchar" MaxLength="100" />
+          <Property Name="Message" Type="nvarchar(max)" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsViewed" Type="bit" />
+        </EntityType>
+        <EntityType Name="Reservation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="ForkliftsModelId" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="ReturnDate" Type="datetime" Nullable="false" />
+          <Property Name="Location" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="InsurancePicture" Type="nvarchar(max)" />
+          <Property Name="ReservationStatusId" Type="int" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedBy" Type="int" Nullable="false" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="IsViewedFlag" Type="bit" />
+        </EntityType>
+        <EntityType Name="ReservationAPI">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="documentNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="customerNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="customerPO" Type="nvarchar" MaxLength="50" />
+          <Property Name="location" Type="nvarchar" MaxLength="50" />
+          <Property Name="comments" Type="nvarchar" MaxLength="50" />
+          <Property Name="insurance" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ReservationDtl">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReservationID" Type="int" Nullable="false" />
+          <Property Name="ForkliftsModelId" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="ReturnDate" Type="datetime" Nullable="false" />
+          <Property Name="Location" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="RentPrice" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ReservationHdr">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DocumentNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="customerNumber" Type="int" Nullable="false" />
+          <Property Name="CustomerPO" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Comments" Type="nvarchar(max)" />
+          <Property Name="TotalRentAmount" Type="money" Nullable="false" />
+          <Property Name="Contract" Type="nvarchar" MaxLength="150" />
+          <Property Name="Insurance" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ReservationStatusId" Type="int" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="UpdatedBy" Type="int" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ReservationStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="States">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StateCode" Type="nvarchar" MaxLength="2" Nullable="false" />
+          <Property Name="StateName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Table_Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Table_Id" Type="int" Nullable="false" />
+          <Property Name="Perpose" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="UserLoginHistory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="LoginTime" Type="datetime" />
+          <Property Name="LogoutTime" Type="datetime" />
+          <Property Name="Offline" Type="bit" />
+          <Property Name="SessionId" Type="int" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Role" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyID" Type="int" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Image" Type="nvarchar" MaxLength="150" />
+          <Property Name="DOB" Type="datetime" Nullable="false" />
+          <Property Name="JobTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="StateID" Type="int" Nullable="false" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ZipCode" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="CompanyAccountInformation" Type="nvarchar(max)" />
+          <Property Name="MobileNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="EmailAddress" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedBy" Type="int" Nullable="false" />
+          <Property Name="UpdatedOn" Type="datetime" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="PasswordRecoveryCode" Type="nvarchar(max)" />
+          <Property Name="AccessToken" Type="nvarchar(max)" />
+          <Property Name="TokenIssueDate" Type="datetime" />
+          <Property Name="TokenExpiryDate" Type="datetime" />
+          <Property Name="FCMDeviceToken" Type="nvarchar(max)" />
+          <Property Name="SecuredKey" Type="nvarchar" MaxLength="70" />
+        </EntityType>
+        <Association Name="FK_equipmentDetail_Forklifts">
+          <End Role="Forklifts" Type="Self.Forklifts" Multiplicity="0..1" />
+          <End Role="equipmentDetail" Type="Self.equipmentDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Forklifts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="equipmentDetail">
+              <PropertyRef Name="equipmentGroup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_equipmentDetail_ForkliftsModel">
+          <End Role="ForkliftsModel" Type="Self.ForkliftsModel" Multiplicity="0..1" />
+          <End Role="equipmentDetail" Type="Self.equipmentDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ForkliftsModel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="equipmentDetail">
+              <PropertyRef Name="modelGroup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_equipmentDetail_ReservationAPI">
+          <End Role="ReservationAPI" Type="Self.ReservationAPI" Multiplicity="0..1" />
+          <End Role="equipmentDetail" Type="Self.equipmentDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReservationAPI">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="equipmentDetail">
+              <PropertyRef Name="ReservationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_feesDetail_equipmentDetail">
+          <End Role="equipmentDetail" Type="Self.equipmentDetail" Multiplicity="0..1" />
+          <End Role="feesDetail" Type="Self.feesDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="equipmentDetail">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="feesDetail">
+              <PropertyRef Name="equipmentDetailID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ForkliftsModel_Forklifts">
+          <End Role="Forklifts" Type="Self.Forklifts" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ForkliftsModel" Type="Self.ForkliftsModel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Forklifts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ForkliftsModel">
+              <PropertyRef Name="ForkliftsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ForkliftsModelCharges_ForkliftsModel">
+          <End Role="ForkliftsModel" Type="Self.ForkliftsModel" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ForkliftsModelCharges" Type="Self.ForkliftsModelCharges" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ForkliftsModel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ForkliftsModelCharges">
+              <PropertyRef Name="ForkliftsModelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ForkliftsModelTransportation_ForkliftsModel">
+          <End Role="ForkliftsModel" Type="Self.ForkliftsModel" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ForkliftsModelTransportation" Type="Self.ForkliftsModelTransportation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ForkliftsModel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ForkliftsModelTransportation">
+              <PropertyRef Name="ForkliftsModelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Mapping_ForkliftsModelCharges_Reservation_Reservation">
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Mapping_ForkliftsModelCharges_Reservation" Type="Self.Mapping_ForkliftsModelCharges_Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reservation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Mapping_ForkliftsModelCharges_Reservation">
+              <PropertyRef Name="ReservationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Mapping_ForkliftsModelTransportation_Reservation_Reservation">
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Mapping_ForkliftsModelTransportation_Reservation" Type="Self.Mapping_ForkliftsModelTransportation_Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reservation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Mapping_ForkliftsModelTransportation_Reservation">
+              <PropertyRef Name="ReservationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Mapping_PricingNationalAccount_Reservation_Reservation">
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Mapping_PricingNationalAccount_Reservation" Type="Self.Mapping_PricingNationalAccount_Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reservation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Mapping_PricingNationalAccount_Reservation">
+              <PropertyRef Name="ReservationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Mapping_PricingStandard_Reservation_Reservation">
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Mapping_PricingStandard_Reservation" Type="Self.Mapping_PricingStandard_Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reservation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Mapping_PricingStandard_Reservation">
+              <PropertyRef Name="ReservationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notification_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Notification" Type="Self.Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reservation_ForkliftsModel">
+          <End Role="ForkliftsModel" Type="Self.ForkliftsModel" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ForkliftsModel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="ForkliftsModelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reservation_User">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReservationDtl_ForkliftsModel">
+          <End Role="ForkliftsModel" Type="Self.ForkliftsModel" Multiplicity="1" />
+          <End Role="ReservationDtl" Type="Self.ReservationDtl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ForkliftsModel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReservationDtl">
+              <PropertyRef Name="ForkliftsModelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReservationDtl_ReservationHdr">
+          <End Role="ReservationHdr" Type="Self.ReservationHdr" Multiplicity="1" />
+          <End Role="ReservationDtl" Type="Self.ReservationDtl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReservationHdr">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ReservationDtl">
+              <PropertyRef Name="ReservationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReservationHdr_ReservationStatus">
+          <End Role="ReservationStatus" Type="Self.ReservationStatus" Multiplicity="1" />
+          <End Role="ReservationHdr" Type="Self.ReservationHdr" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReservationStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReservationHdr">
+              <PropertyRef Name="ReservationStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReservationHdr_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="ReservationHdr" Type="Self.ReservationHdr" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReservationHdr">
+              <PropertyRef Name="customerNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_CompanySetupPage_tbl_User">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CompanySetupPage" Type="Self.CompanySetupPage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CompanySetupPage">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_User_tbl_Role">
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRole">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserLoginHistory_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="UserLoginHistory" Type="Self.UserLoginHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserLoginHistory">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_States">
+          <End Role="States" Type="Self.States" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="States">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="StateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Users1" Type="Self.Users" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users1">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="eRentModelStoreContainer">
+          <EntitySet Name="CompanySetupPage" EntityType="Self.CompanySetupPage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="equipmentDetail" EntityType="Self.equipmentDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="feesDetail" EntityType="Self.feesDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Forklifts" EntityType="Self.Forklifts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ForkliftsModel" EntityType="Self.ForkliftsModel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ForkliftsModelCharges" EntityType="Self.ForkliftsModelCharges" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ForkliftsModelTransportation" EntityType="Self.ForkliftsModelTransportation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Mapping_ForkliftsModelCharges_Reservation" EntityType="Self.Mapping_ForkliftsModelCharges_Reservation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Mapping_ForkliftsModelTransportation_Reservation" EntityType="Self.Mapping_ForkliftsModelTransportation_Reservation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Mapping_PricingNationalAccount_Reservation" EntityType="Self.Mapping_PricingNationalAccount_Reservation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Mapping_PricingStandard_Reservation" EntityType="Self.Mapping_PricingStandard_Reservation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Notification" EntityType="Self.Notification" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reservation" EntityType="Self.Reservation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReservationAPI" EntityType="Self.ReservationAPI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReservationDtl" EntityType="Self.ReservationDtl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReservationHdr" EntityType="Self.ReservationHdr" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReservationStatus" EntityType="Self.ReservationStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="States" EntityType="Self.States" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserLog" EntityType="Self.UserLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserLoginHistory" EntityType="Self.UserLoginHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_equipmentDetail_Forklifts" Association="Self.FK_equipmentDetail_Forklifts">
+            <End Role="Forklifts" EntitySet="Forklifts" />
+            <End Role="equipmentDetail" EntitySet="equipmentDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_equipmentDetail_ForkliftsModel" Association="Self.FK_equipmentDetail_ForkliftsModel">
+            <End Role="ForkliftsModel" EntitySet="ForkliftsModel" />
+            <End Role="equipmentDetail" EntitySet="equipmentDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_equipmentDetail_ReservationAPI" Association="Self.FK_equipmentDetail_ReservationAPI">
+            <End Role="ReservationAPI" EntitySet="ReservationAPI" />
+            <End Role="equipmentDetail" EntitySet="equipmentDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_feesDetail_equipmentDetail" Association="Self.FK_feesDetail_equipmentDetail">
+            <End Role="equipmentDetail" EntitySet="equipmentDetail" />
+            <End Role="feesDetail" EntitySet="feesDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ForkliftsModel_Forklifts" Association="Self.FK_ForkliftsModel_Forklifts">
+            <End Role="Forklifts" EntitySet="Forklifts" />
+            <End Role="ForkliftsModel" EntitySet="ForkliftsModel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ForkliftsModelCharges_ForkliftsModel" Association="Self.FK_ForkliftsModelCharges_ForkliftsModel">
+            <End Role="ForkliftsModel" EntitySet="ForkliftsModel" />
+            <End Role="ForkliftsModelCharges" EntitySet="ForkliftsModelCharges" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ForkliftsModelTransportation_ForkliftsModel" Association="Self.FK_ForkliftsModelTransportation_ForkliftsModel">
+            <End Role="ForkliftsModel" EntitySet="ForkliftsModel" />
+            <End Role="ForkliftsModelTransportation" EntitySet="ForkliftsModelTransportation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Mapping_ForkliftsModelCharges_Reservation_Reservation" Association="Self.FK_Mapping_ForkliftsModelCharges_Reservation_Reservation">
+            <End Role="Reservation" EntitySet="Reservation" />
+            <End Role="Mapping_ForkliftsModelCharges_Reservation" EntitySet="Mapping_ForkliftsModelCharges_Reservation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Mapping_ForkliftsModelTransportation_Reservation_Reservation" Association="Self.FK_Mapping_ForkliftsModelTransportation_Reservation_Reservation">
+            <End Role="Reservation" EntitySet="Reservation" />
+            <End Role="Mapping_ForkliftsModelTransportation_Reservation" EntitySet="Mapping_ForkliftsModelTransportation_Reservation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Mapping_PricingNationalAccount_Reservation_Reservation" Association="Self.FK_Mapping_PricingNationalAccount_Reservation_Reservation">
+            <End Role="Reservation" EntitySet="Reservation" />
+            <End Role="Mapping_PricingNationalAccount_Reservation" EntitySet="Mapping_PricingNationalAccount_Reservation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Mapping_PricingStandard_Reservation_Reservation" Association="Self.FK_Mapping_PricingStandard_Reservation_Reservation">
+            <End Role="Reservation" EntitySet="Reservation" />
+            <End Role="Mapping_PricingStandard_Reservation" EntitySet="Mapping_PricingStandard_Reservation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notification_Users" Association="Self.FK_Notification_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Notification" EntitySet="Notification" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reservation_ForkliftsModel" Association="Self.FK_Reservation_ForkliftsModel">
+            <End Role="ForkliftsModel" EntitySet="ForkliftsModel" />
+            <End Role="Reservation" EntitySet="Reservation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reservation_User" Association="Self.FK_Reservation_User">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Reservation" EntitySet="Reservation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReservationDtl_ForkliftsModel" Association="Self.FK_ReservationDtl_ForkliftsModel">
+            <End Role="ForkliftsModel" EntitySet="ForkliftsModel" />
+            <End Role="ReservationDtl" EntitySet="ReservationDtl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReservationDtl_ReservationHdr" Association="Self.FK_ReservationDtl_ReservationHdr">
+            <End Role="ReservationHdr" EntitySet="ReservationHdr" />
+            <End Role="ReservationDtl" EntitySet="ReservationDtl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReservationHdr_ReservationStatus" Association="Self.FK_ReservationHdr_ReservationStatus">
+            <End Role="ReservationStatus" EntitySet="ReservationStatus" />
+            <End Role="ReservationHdr" EntitySet="ReservationHdr" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReservationHdr_Users" Association="Self.FK_ReservationHdr_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ReservationHdr" EntitySet="ReservationHdr" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_CompanySetupPage_tbl_User" Association="Self.FK_tbl_CompanySetupPage_tbl_User">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="CompanySetupPage" EntitySet="CompanySetupPage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_User_tbl_Role" Association="Self.FK_tbl_User_tbl_Role">
+            <End Role="UserRole" EntitySet="UserRole" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserLoginHistory_Users" Association="Self.FK_UserLoginHistory_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserLoginHistory" EntitySet="UserLoginHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_States" Association="Self.FK_Users_States">
+            <End Role="States" EntitySet="States" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Users" Association="Self.FK_Users_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Users1" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="eRentModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CompanySetupPage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Logo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Header" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Footer" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="BannerMassage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TermsOfUse" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PrivacyPolicy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Url" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int32" Nullable="false" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK_tbl_CompanySetupPage_tbl_User" FromRole="CompanySetupPage" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="equipmentDetail">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReservationID" Type="Int32" />
+          <Property Name="modelGroup" Type="Int32" />
+          <Property Name="equipmentGroup" Type="Int32" />
+          <Property Name="quantity" Type="Int32" />
+          <Property Name="startDate" Type="DateTime" Precision="0" />
+          <Property Name="returnDate" Type="DateTime" Precision="0" />
+          <Property Name="dailyRate" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="weeklyRate" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="monthlyRate" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="transportation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Forklift" Relationship="Self.FK_equipmentDetail_Forklifts" FromRole="equipmentDetail" ToRole="Forklifts" />
+          <NavigationProperty Name="ForkliftsModel" Relationship="Self.FK_equipmentDetail_ForkliftsModel" FromRole="equipmentDetail" ToRole="ForkliftsModel" />
+          <NavigationProperty Name="ReservationAPI" Relationship="Self.FK_equipmentDetail_ReservationAPI" FromRole="equipmentDetail" ToRole="ReservationAPI" />
+          <NavigationProperty Name="feesDetails" Relationship="Self.FK_feesDetail_equipmentDetail" FromRole="equipmentDetail" ToRole="feesDetail" />
+        </EntityType>
+        <EntityType Name="feesDetail">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="equipmentDetailID" Type="Int32" />
+          <Property Name="charge" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="amount" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="equipmentDetail" Relationship="Self.FK_feesDetail_equipmentDetail" FromRole="feesDetail" ToRole="equipmentDetail" />
+        </EntityType>
+        <EntityType Name="Forklift">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Picture" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int32" Nullable="false" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="equipmentDetails" Relationship="Self.FK_equipmentDetail_Forklifts" FromRole="Forklifts" ToRole="equipmentDetail" />
+          <NavigationProperty Name="ForkliftsModels" Relationship="Self.FK_ForkliftsModel_Forklifts" FromRole="Forklifts" ToRole="ForkliftsModel" />
+        </EntityType>
+        <EntityType Name="ForkliftsModel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ForkliftsId" Type="Int32" Nullable="false" />
+          <Property Name="Picture" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Make" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Capacity" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Model" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MaxMeter" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RentPrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PurchasePrice" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="PricingStandard_Daily" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="PricingStandard_Weekly" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="PricingStandard_Montly" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="PricingNationalAccount_Daily" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="PricingNationalAccount_Weekly" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="PricingNationalAccount_Montly" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int32" Nullable="false" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="equipmentDetails" Relationship="Self.FK_equipmentDetail_ForkliftsModel" FromRole="ForkliftsModel" ToRole="equipmentDetail" />
+          <NavigationProperty Name="Forklift" Relationship="Self.FK_ForkliftsModel_Forklifts" FromRole="ForkliftsModel" ToRole="Forklifts" />
+          <NavigationProperty Name="ForkliftsModelCharges" Relationship="Self.FK_ForkliftsModelCharges_ForkliftsModel" FromRole="ForkliftsModel" ToRole="ForkliftsModelCharges" />
+          <NavigationProperty Name="ForkliftsModelTransportations" Relationship="Self.FK_ForkliftsModelTransportation_ForkliftsModel" FromRole="ForkliftsModel" ToRole="ForkliftsModelTransportation" />
+          <NavigationProperty Name="Reservations" Relationship="Self.FK_Reservation_ForkliftsModel" FromRole="ForkliftsModel" ToRole="Reservation" />
+          <NavigationProperty Name="ReservationDtls" Relationship="Self.FK_ReservationDtl_ForkliftsModel" FromRole="ForkliftsModel" ToRole="ReservationDtl" />
+        </EntityType>
+        <EntityType Name="ForkliftsModelCharge">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ForkliftsModelId" Type="Int32" Nullable="false" />
+          <Property Name="ChargesName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <NavigationProperty Name="ForkliftsModel" Relationship="Self.FK_ForkliftsModelCharges_ForkliftsModel" FromRole="ForkliftsModelCharges" ToRole="ForkliftsModel" />
+        </EntityType>
+        <EntityType Name="ForkliftsModelTransportation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ForkliftsModelId" Type="Int32" Nullable="false" />
+          <Property Name="PickUpFees" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="DropOff_PickUp_Fees" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="DropOffOnly" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="PickUpOnly" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="LossDamageWaiver" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <NavigationProperty Name="ForkliftsModel" Relationship="Self.FK_ForkliftsModelTransportation_ForkliftsModel" FromRole="ForkliftsModelTransportation" ToRole="ForkliftsModel" />
+        </EntityType>
+        <EntityType Name="Mapping_ForkliftsModelCharges_Reservation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ForkliftsModelChargesId" Type="Int32" Nullable="false" />
+          <Property Name="ReservationId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Reservation" Relationship="Self.FK_Mapping_ForkliftsModelCharges_Reservation_Reservation" FromRole="Mapping_ForkliftsModelCharges_Reservation" ToRole="Reservation" />
+        </EntityType>
+        <EntityType Name="Mapping_ForkliftsModelTransportation_Reservation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ForkliftsModelTransportationId" Type="Int32" Nullable="false" />
+          <Property Name="ReservationId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Reservation" Relationship="Self.FK_Mapping_ForkliftsModelTransportation_Reservation_Reservation" FromRole="Mapping_ForkliftsModelTransportation_Reservation" ToRole="Reservation" />
+        </EntityType>
+        <EntityType Name="Mapping_PricingNationalAccount_Reservation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PricingNationalAccountId" Type="Int32" Nullable="false" />
+          <Property Name="ReservationId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Reservation" Relationship="Self.FK_Mapping_PricingNationalAccount_Reservation_Reservation" FromRole="Mapping_PricingNationalAccount_Reservation" ToRole="Reservation" />
+        </EntityType>
+        <EntityType Name="Mapping_PricingStandard_Reservation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PricingStandardId" Type="Int32" Nullable="false" />
+          <Property Name="ReservationId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Reservation" Relationship="Self.FK_Mapping_PricingStandard_Reservation_Reservation" FromRole="Mapping_PricingStandard_Reservation" ToRole="Reservation" />
+        </EntityType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="NotificationId" />
+          </Key>
+          <Property Name="NotificationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="FCMToken" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsViewed" Type="Boolean" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Notification_Users" FromRole="Notification" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Reservation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="ForkliftsModelId" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ReturnDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Location" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="InsurancePicture" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ReservationStatusId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int32" Nullable="false" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="IsViewedFlag" Type="Boolean" />
+          <NavigationProperty Name="ForkliftsModel" Relationship="Self.FK_Reservation_ForkliftsModel" FromRole="Reservation" ToRole="ForkliftsModel" />
+          <NavigationProperty Name="Mapping_ForkliftsModelCharges_Reservation" Relationship="Self.FK_Mapping_ForkliftsModelCharges_Reservation_Reservation" FromRole="Reservation" ToRole="Mapping_ForkliftsModelCharges_Reservation" />
+          <NavigationProperty Name="Mapping_ForkliftsModelTransportation_Reservation" Relationship="Self.FK_Mapping_ForkliftsModelTransportation_Reservation_Reservation" FromRole="Reservation" ToRole="Mapping_ForkliftsModelTransportation_Reservation" />
+          <NavigationProperty Name="Mapping_PricingNationalAccount_Reservation" Relationship="Self.FK_Mapping_PricingNationalAccount_Reservation_Reservation" FromRole="Reservation" ToRole="Mapping_PricingNationalAccount_Reservation" />
+          <NavigationProperty Name="Mapping_PricingStandard_Reservation" Relationship="Self.FK_Mapping_PricingStandard_Reservation_Reservation" FromRole="Reservation" ToRole="Mapping_PricingStandard_Reservation" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Reservation_User" FromRole="Reservation" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="ReservationAPI">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="documentNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="customerNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="customerPO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="comments" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="insurance" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="equipmentDetails" Relationship="Self.FK_equipmentDetail_ReservationAPI" FromRole="ReservationAPI" ToRole="equipmentDetail" />
+        </EntityType>
+        <EntityType Name="ReservationDtl">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReservationID" Type="Int32" Nullable="false" />
+          <Property Name="ForkliftsModelId" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ReturnDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Location" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RentPrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <NavigationProperty Name="ForkliftsModel" Relationship="Self.FK_ReservationDtl_ForkliftsModel" FromRole="ReservationDtl" ToRole="ForkliftsModel" />
+          <NavigationProperty Name="ReservationHdr" Relationship="Self.FK_ReservationDtl_ReservationHdr" FromRole="ReservationDtl" ToRole="ReservationHdr" />
+        </EntityType>
+        <EntityType Name="ReservationHdr">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DocumentNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="customerNumber" Type="Int32" Nullable="false" />
+          <Property Name="CustomerPO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TotalRentAmount" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Contract" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Insurance" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ReservationStatusId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int32" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ReservationDtls" Relationship="Self.FK_ReservationDtl_ReservationHdr" FromRole="ReservationHdr" ToRole="ReservationDtl" />
+          <NavigationProperty Name="ReservationStatu" Relationship="Self.FK_ReservationHdr_ReservationStatus" FromRole="ReservationHdr" ToRole="ReservationStatus" />
+          <NavigationProperty Name="User" Relationship="Self.FK_ReservationHdr_Users" FromRole="ReservationHdr" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="ReservationStatu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ReservationHdrs" Relationship="Self.FK_ReservationHdr_ReservationStatus" FromRole="ReservationStatus" ToRole="ReservationHdr" />
+        </EntityType>
+        <EntityType Name="State">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StateCode" Type="String" MaxLength="2" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StateName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Users_States" FromRole="States" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="UserLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Table_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Table_Id" Type="Int32" Nullable="false" />
+          <Property Name="Perpose" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="UserLoginHistory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="LoginTime" Type="DateTime" Precision="3" />
+          <Property Name="LogoutTime" Type="DateTime" Precision="3" />
+          <Property Name="Offline" Type="Boolean" />
+          <Property Name="SessionId" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="Self.FK_UserLoginHistory_Users" FromRole="UserLoginHistory" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_tbl_User_tbl_Role" FromRole="UserRole" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyID" Type="Int32" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Image" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="DOB" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="JobTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CompanyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StateID" Type="Int32" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ZipCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CompanyAccountInformation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MobileNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EmailAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedBy" Type="Int32" Nullable="false" />
+          <Property Name="UpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordRecoveryCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AccessToken" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TokenIssueDate" Type="DateTime" Precision="3" />
+          <Property Name="TokenExpiryDate" Type="DateTime" Precision="3" />
+          <Property Name="FCMDeviceToken" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecuredKey" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CompanySetupPages" Relationship="Self.FK_tbl_CompanySetupPage_tbl_User" FromRole="Users" ToRole="CompanySetupPage" />
+          <NavigationProperty Name="Notifications" Relationship="Self.FK_Notification_Users" FromRole="Users" ToRole="Notification" />
+          <NavigationProperty Name="Reservations" Relationship="Self.FK_Reservation_User" FromRole="Users" ToRole="Reservation" />
+          <NavigationProperty Name="ReservationHdrs" Relationship="Self.FK_ReservationHdr_Users" FromRole="Users" ToRole="ReservationHdr" />
+          <NavigationProperty Name="State" Relationship="Self.FK_Users_States" FromRole="Users" ToRole="States" />
+          <NavigationProperty Name="UserLoginHistories" Relationship="Self.FK_UserLoginHistory_Users" FromRole="Users" ToRole="UserLoginHistory" />
+          <NavigationProperty Name="UserRole" Relationship="Self.FK_tbl_User_tbl_Role" FromRole="Users" ToRole="UserRole" />
+          <NavigationProperty Name="Users1" Relationship="Self.FK_Users_Users" FromRole="Users" ToRole="Users1" />
+          <NavigationProperty Name="User1" Relationship="Self.FK_Users_Users" FromRole="Users1" ToRole="Users" />
+        </EntityType>
+        <Association Name="FK_tbl_CompanySetupPage_tbl_User">
+          <End Role="Users" Type="Self.User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CompanySetupPage" Type="Self.CompanySetupPage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CompanySetupPage">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_equipmentDetail_Forklifts">
+          <End Role="Forklifts" Type="Self.Forklift" Multiplicity="0..1" />
+          <End Role="equipmentDetail" Type="Self.equipmentDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Forklifts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="equipmentDetail">
+              <PropertyRef Name="equipmentGroup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_equipmentDetail_ForkliftsModel">
+          <End Role="ForkliftsModel" Type="Self.ForkliftsModel" Multiplicity="0..1" />
+          <End Role="equipmentDetail" Type="Self.equipmentDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ForkliftsModel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="equipmentDetail">
+              <PropertyRef Name="modelGroup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_equipmentDetail_ReservationAPI">
+          <End Role="ReservationAPI" Type="Self.ReservationAPI" Multiplicity="0..1" />
+          <End Role="equipmentDetail" Type="Self.equipmentDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReservationAPI">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="equipmentDetail">
+              <PropertyRef Name="ReservationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_feesDetail_equipmentDetail">
+          <End Role="equipmentDetail" Type="Self.equipmentDetail" Multiplicity="0..1" />
+          <End Role="feesDetail" Type="Self.feesDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="equipmentDetail">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="feesDetail">
+              <PropertyRef Name="equipmentDetailID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ForkliftsModel_Forklifts">
+          <End Role="Forklifts" Type="Self.Forklift" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ForkliftsModel" Type="Self.ForkliftsModel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Forklifts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ForkliftsModel">
+              <PropertyRef Name="ForkliftsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ForkliftsModelCharges_ForkliftsModel">
+          <End Role="ForkliftsModel" Type="Self.ForkliftsModel" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ForkliftsModelCharges" Type="Self.ForkliftsModelCharge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ForkliftsModel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ForkliftsModelCharges">
+              <PropertyRef Name="ForkliftsModelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ForkliftsModelTransportation_ForkliftsModel">
+          <End Role="ForkliftsModel" Type="Self.ForkliftsModel" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ForkliftsModelTransportation" Type="Self.ForkliftsModelTransportation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ForkliftsModel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ForkliftsModelTransportation">
+              <PropertyRef Name="ForkliftsModelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reservation_ForkliftsModel">
+          <End Role="ForkliftsModel" Type="Self.ForkliftsModel" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ForkliftsModel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="ForkliftsModelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReservationDtl_ForkliftsModel">
+          <End Role="ForkliftsModel" Type="Self.ForkliftsModel" Multiplicity="1" />
+          <End Role="ReservationDtl" Type="Self.ReservationDtl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ForkliftsModel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReservationDtl">
+              <PropertyRef Name="ForkliftsModelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Mapping_ForkliftsModelCharges_Reservation_Reservation">
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Mapping_ForkliftsModelCharges_Reservation" Type="Self.Mapping_ForkliftsModelCharges_Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reservation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Mapping_ForkliftsModelCharges_Reservation">
+              <PropertyRef Name="ReservationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Mapping_ForkliftsModelTransportation_Reservation_Reservation">
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Mapping_ForkliftsModelTransportation_Reservation" Type="Self.Mapping_ForkliftsModelTransportation_Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reservation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Mapping_ForkliftsModelTransportation_Reservation">
+              <PropertyRef Name="ReservationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Mapping_PricingNationalAccount_Reservation_Reservation">
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Mapping_PricingNationalAccount_Reservation" Type="Self.Mapping_PricingNationalAccount_Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reservation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Mapping_PricingNationalAccount_Reservation">
+              <PropertyRef Name="ReservationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Mapping_PricingStandard_Reservation_Reservation">
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Mapping_PricingStandard_Reservation" Type="Self.Mapping_PricingStandard_Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reservation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Mapping_PricingStandard_Reservation">
+              <PropertyRef Name="ReservationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notification_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Notification" Type="Self.Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reservation_User">
+          <End Role="Users" Type="Self.User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReservationDtl_ReservationHdr">
+          <End Role="ReservationHdr" Type="Self.ReservationHdr" Multiplicity="1" />
+          <End Role="ReservationDtl" Type="Self.ReservationDtl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReservationHdr">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ReservationDtl">
+              <PropertyRef Name="ReservationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReservationHdr_ReservationStatus">
+          <End Role="ReservationStatus" Type="Self.ReservationStatu" Multiplicity="1" />
+          <End Role="ReservationHdr" Type="Self.ReservationHdr" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReservationStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReservationHdr">
+              <PropertyRef Name="ReservationStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReservationHdr_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="ReservationHdr" Type="Self.ReservationHdr" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ReservationHdr">
+              <PropertyRef Name="customerNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_States">
+          <End Role="States" Type="Self.State" Multiplicity="1" />
+          <End Role="Users" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="States">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="StateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserLoginHistory_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="UserLoginHistory" Type="Self.UserLoginHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserLoginHistory">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_User_tbl_Role">
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Users" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRole">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Users1" Type="Self.User" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users1">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CompanySetupPages" EntityType="Self.CompanySetupPage" />
+          <EntitySet Name="equipmentDetails" EntityType="Self.equipmentDetail" />
+          <EntitySet Name="feesDetails" EntityType="Self.feesDetail" />
+          <EntitySet Name="Forklifts" EntityType="Self.Forklift" />
+          <EntitySet Name="ForkliftsModels" EntityType="Self.ForkliftsModel" />
+          <EntitySet Name="ForkliftsModelCharges" EntityType="Self.ForkliftsModelCharge" />
+          <EntitySet Name="ForkliftsModelTransportations" EntityType="Self.ForkliftsModelTransportation" />
+          <EntitySet Name="Mapping_ForkliftsModelCharges_Reservation" EntityType="Self.Mapping_ForkliftsModelCharges_Reservation" />
+          <EntitySet Name="Mapping_ForkliftsModelTransportation_Reservation" EntityType="Self.Mapping_ForkliftsModelTransportation_Reservation" />
+          <EntitySet Name="Mapping_PricingNationalAccount_Reservation" EntityType="Self.Mapping_PricingNationalAccount_Reservation" />
+          <EntitySet Name="Mapping_PricingStandard_Reservation" EntityType="Self.Mapping_PricingStandard_Reservation" />
+          <EntitySet Name="Notifications" EntityType="Self.Notification" />
+          <EntitySet Name="Reservations" EntityType="Self.Reservation" />
+          <EntitySet Name="ReservationAPIs" EntityType="Self.ReservationAPI" />
+          <EntitySet Name="ReservationDtls" EntityType="Self.ReservationDtl" />
+          <EntitySet Name="ReservationHdrs" EntityType="Self.ReservationHdr" />
+          <EntitySet Name="ReservationStatus" EntityType="Self.ReservationStatu" />
+          <EntitySet Name="States" EntityType="Self.State" />
+          <EntitySet Name="UserLogs" EntityType="Self.UserLog" />
+          <EntitySet Name="UserLoginHistories" EntityType="Self.UserLoginHistory" />
+          <EntitySet Name="UserRoles" EntityType="Self.UserRole" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_tbl_CompanySetupPage_tbl_User" Association="Self.FK_tbl_CompanySetupPage_tbl_User">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="CompanySetupPage" EntitySet="CompanySetupPages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_equipmentDetail_Forklifts" Association="Self.FK_equipmentDetail_Forklifts">
+            <End Role="Forklifts" EntitySet="Forklifts" />
+            <End Role="equipmentDetail" EntitySet="equipmentDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_equipmentDetail_ForkliftsModel" Association="Self.FK_equipmentDetail_ForkliftsModel">
+            <End Role="ForkliftsModel" EntitySet="ForkliftsModels" />
+            <End Role="equipmentDetail" EntitySet="equipmentDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_equipmentDetail_ReservationAPI" Association="Self.FK_equipmentDetail_ReservationAPI">
+            <End Role="ReservationAPI" EntitySet="ReservationAPIs" />
+            <End Role="equipmentDetail" EntitySet="equipmentDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_feesDetail_equipmentDetail" Association="Self.FK_feesDetail_equipmentDetail">
+            <End Role="equipmentDetail" EntitySet="equipmentDetails" />
+            <End Role="feesDetail" EntitySet="feesDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ForkliftsModel_Forklifts" Association="Self.FK_ForkliftsModel_Forklifts">
+            <End Role="Forklifts" EntitySet="Forklifts" />
+            <End Role="ForkliftsModel" EntitySet="ForkliftsModels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ForkliftsModelCharges_ForkliftsModel" Association="Self.FK_ForkliftsModelCharges_ForkliftsModel">
+            <End Role="ForkliftsModel" EntitySet="ForkliftsModels" />
+            <End Role="ForkliftsModelCharges" EntitySet="ForkliftsModelCharges" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ForkliftsModelTransportation_ForkliftsModel" Association="Self.FK_ForkliftsModelTransportation_ForkliftsModel">
+            <End Role="ForkliftsModel" EntitySet="ForkliftsModels" />
+            <End Role="ForkliftsModelTransportation" EntitySet="ForkliftsModelTransportations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reservation_ForkliftsModel" Association="Self.FK_Reservation_ForkliftsModel">
+            <End Role="ForkliftsModel" EntitySet="ForkliftsModels" />
+            <End Role="Reservation" EntitySet="Reservations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReservationDtl_ForkliftsModel" Association="Self.FK_ReservationDtl_ForkliftsModel">
+            <End Role="ForkliftsModel" EntitySet="ForkliftsModels" />
+            <End Role="ReservationDtl" EntitySet="ReservationDtls" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Mapping_ForkliftsModelCharges_Reservation_Reservation" Association="Self.FK_Mapping_ForkliftsModelCharges_Reservation_Reservation">
+            <End Role="Reservation" EntitySet="Reservations" />
+            <End Role="Mapping_ForkliftsModelCharges_Reservation" EntitySet="Mapping_ForkliftsModelCharges_Reservation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Mapping_ForkliftsModelTransportation_Reservation_Reservation" Association="Self.FK_Mapping_ForkliftsModelTransportation_Reservation_Reservation">
+            <End Role="Reservation" EntitySet="Reservations" />
+            <End Role="Mapping_ForkliftsModelTransportation_Reservation" EntitySet="Mapping_ForkliftsModelTransportation_Reservation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Mapping_PricingNationalAccount_Reservation_Reservation" Association="Self.FK_Mapping_PricingNationalAccount_Reservation_Reservation">
+            <End Role="Reservation" EntitySet="Reservations" />
+            <End Role="Mapping_PricingNationalAccount_Reservation" EntitySet="Mapping_PricingNationalAccount_Reservation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Mapping_PricingStandard_Reservation_Reservation" Association="Self.FK_Mapping_PricingStandard_Reservation_Reservation">
+            <End Role="Reservation" EntitySet="Reservations" />
+            <End Role="Mapping_PricingStandard_Reservation" EntitySet="Mapping_PricingStandard_Reservation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notification_Users" Association="Self.FK_Notification_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Notification" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reservation_User" Association="Self.FK_Reservation_User">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Reservation" EntitySet="Reservations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReservationDtl_ReservationHdr" Association="Self.FK_ReservationDtl_ReservationHdr">
+            <End Role="ReservationHdr" EntitySet="ReservationHdrs" />
+            <End Role="ReservationDtl" EntitySet="ReservationDtls" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReservationHdr_ReservationStatus" Association="Self.FK_ReservationHdr_ReservationStatus">
+            <End Role="ReservationStatus" EntitySet="ReservationStatus" />
+            <End Role="ReservationHdr" EntitySet="ReservationHdrs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReservationHdr_Users" Association="Self.FK_ReservationHdr_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ReservationHdr" EntitySet="ReservationHdrs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_States" Association="Self.FK_Users_States">
+            <End Role="States" EntitySet="States" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserLoginHistory_Users" Association="Self.FK_UserLoginHistory_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserLoginHistory" EntitySet="UserLoginHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_User_tbl_Role" Association="Self.FK_tbl_User_tbl_Role">
+            <End Role="UserRole" EntitySet="UserRoles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Users" Association="Self.FK_Users_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Users1" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="eRentModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="CompanySetupPages">
+            <EntityTypeMapping TypeName="eRentModel.CompanySetupPage">
+              <MappingFragment StoreEntitySet="CompanySetupPage">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+                <ScalarProperty Name="Header" ColumnName="Header" />
+                <ScalarProperty Name="Footer" ColumnName="Footer" />
+                <ScalarProperty Name="BannerMassage" ColumnName="BannerMassage" />
+                <ScalarProperty Name="TermsOfUse" ColumnName="TermsOfUse" />
+                <ScalarProperty Name="PrivacyPolicy" ColumnName="PrivacyPolicy" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="equipmentDetails">
+            <EntityTypeMapping TypeName="eRentModel.equipmentDetail">
+              <MappingFragment StoreEntitySet="equipmentDetail">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="ReservationID" ColumnName="ReservationID" />
+                <ScalarProperty Name="modelGroup" ColumnName="modelGroup" />
+                <ScalarProperty Name="equipmentGroup" ColumnName="equipmentGroup" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="startDate" ColumnName="startDate" />
+                <ScalarProperty Name="returnDate" ColumnName="returnDate" />
+                <ScalarProperty Name="dailyRate" ColumnName="dailyRate" />
+                <ScalarProperty Name="weeklyRate" ColumnName="weeklyRate" />
+                <ScalarProperty Name="monthlyRate" ColumnName="monthlyRate" />
+                <ScalarProperty Name="transportation" ColumnName="transportation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="feesDetails">
+            <EntityTypeMapping TypeName="eRentModel.feesDetail">
+              <MappingFragment StoreEntitySet="feesDetail">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="equipmentDetailID" ColumnName="equipmentDetailID" />
+                <ScalarProperty Name="charge" ColumnName="charge" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Forklifts">
+            <EntityTypeMapping TypeName="eRentModel.Forklift">
+              <MappingFragment StoreEntitySet="Forklifts">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ForkliftsModels">
+            <EntityTypeMapping TypeName="eRentModel.ForkliftsModel">
+              <MappingFragment StoreEntitySet="ForkliftsModel">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ForkliftsId" ColumnName="ForkliftsId" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+                <ScalarProperty Name="Make" ColumnName="Make" />
+                <ScalarProperty Name="Capacity" ColumnName="Capacity" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="MaxMeter" ColumnName="MaxMeter" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="RentPrice" ColumnName="RentPrice" />
+                <ScalarProperty Name="PurchasePrice" ColumnName="PurchasePrice" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="PricingStandard_Daily" ColumnName="PricingStandard_Daily" />
+                <ScalarProperty Name="PricingStandard_Weekly" ColumnName="PricingStandard_Weekly" />
+                <ScalarProperty Name="PricingStandard_Montly" ColumnName="PricingStandard_Montly" />
+                <ScalarProperty Name="PricingNationalAccount_Daily" ColumnName="PricingNationalAccount_Daily" />
+                <ScalarProperty Name="PricingNationalAccount_Weekly" ColumnName="PricingNationalAccount_Weekly" />
+                <ScalarProperty Name="PricingNationalAccount_Montly" ColumnName="PricingNationalAccount_Montly" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ForkliftsModelCharges">
+            <EntityTypeMapping TypeName="eRentModel.ForkliftsModelCharge">
+              <MappingFragment StoreEntitySet="ForkliftsModelCharges">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ForkliftsModelId" ColumnName="ForkliftsModelId" />
+                <ScalarProperty Name="ChargesName" ColumnName="ChargesName" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ForkliftsModelTransportations">
+            <EntityTypeMapping TypeName="eRentModel.ForkliftsModelTransportation">
+              <MappingFragment StoreEntitySet="ForkliftsModelTransportation">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ForkliftsModelId" ColumnName="ForkliftsModelId" />
+                <ScalarProperty Name="PickUpFees" ColumnName="PickUpFees" />
+                <ScalarProperty Name="DropOff_PickUp_Fees" ColumnName="DropOff_PickUp_Fees" />
+                <ScalarProperty Name="DropOffOnly" ColumnName="DropOffOnly" />
+                <ScalarProperty Name="PickUpOnly" ColumnName="PickUpOnly" />
+                <ScalarProperty Name="LossDamageWaiver" ColumnName="LossDamageWaiver" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mapping_ForkliftsModelCharges_Reservation">
+            <EntityTypeMapping TypeName="eRentModel.Mapping_ForkliftsModelCharges_Reservation">
+              <MappingFragment StoreEntitySet="Mapping_ForkliftsModelCharges_Reservation">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ForkliftsModelChargesId" ColumnName="ForkliftsModelChargesId" />
+                <ScalarProperty Name="ReservationId" ColumnName="ReservationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mapping_ForkliftsModelTransportation_Reservation">
+            <EntityTypeMapping TypeName="eRentModel.Mapping_ForkliftsModelTransportation_Reservation">
+              <MappingFragment StoreEntitySet="Mapping_ForkliftsModelTransportation_Reservation">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ForkliftsModelTransportationId" ColumnName="ForkliftsModelTransportationId" />
+                <ScalarProperty Name="ReservationId" ColumnName="ReservationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mapping_PricingNationalAccount_Reservation">
+            <EntityTypeMapping TypeName="eRentModel.Mapping_PricingNationalAccount_Reservation">
+              <MappingFragment StoreEntitySet="Mapping_PricingNationalAccount_Reservation">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PricingNationalAccountId" ColumnName="PricingNationalAccountId" />
+                <ScalarProperty Name="ReservationId" ColumnName="ReservationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mapping_PricingStandard_Reservation">
+            <EntityTypeMapping TypeName="eRentModel.Mapping_PricingStandard_Reservation">
+              <MappingFragment StoreEntitySet="Mapping_PricingStandard_Reservation">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PricingStandardId" ColumnName="PricingStandardId" />
+                <ScalarProperty Name="ReservationId" ColumnName="ReservationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Notifications">
+            <EntityTypeMapping TypeName="eRentModel.Notification">
+              <MappingFragment StoreEntitySet="Notification">
+                <ScalarProperty Name="NotificationId" ColumnName="NotificationId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="FCMToken" ColumnName="FCMToken" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsViewed" ColumnName="IsViewed" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reservations">
+            <EntityTypeMapping TypeName="eRentModel.Reservation">
+              <MappingFragment StoreEntitySet="Reservation">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ForkliftsModelId" ColumnName="ForkliftsModelId" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="ReturnDate" ColumnName="ReturnDate" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="InsurancePicture" ColumnName="InsurancePicture" />
+                <ScalarProperty Name="ReservationStatusId" ColumnName="ReservationStatusId" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsViewedFlag" ColumnName="IsViewedFlag" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReservationAPIs">
+            <EntityTypeMapping TypeName="eRentModel.ReservationAPI">
+              <MappingFragment StoreEntitySet="ReservationAPI">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="documentNumber" ColumnName="documentNumber" />
+                <ScalarProperty Name="customerNumber" ColumnName="customerNumber" />
+                <ScalarProperty Name="customerPO" ColumnName="customerPO" />
+                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="comments" ColumnName="comments" />
+                <ScalarProperty Name="insurance" ColumnName="insurance" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReservationDtls">
+            <EntityTypeMapping TypeName="eRentModel.ReservationDtl">
+              <MappingFragment StoreEntitySet="ReservationDtl">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ReservationID" ColumnName="ReservationID" />
+                <ScalarProperty Name="ForkliftsModelId" ColumnName="ForkliftsModelId" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="ReturnDate" ColumnName="ReturnDate" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="RentPrice" ColumnName="RentPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReservationHdrs">
+            <EntityTypeMapping TypeName="eRentModel.ReservationHdr">
+              <MappingFragment StoreEntitySet="ReservationHdr">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="DocumentNumber" ColumnName="DocumentNumber" />
+                <ScalarProperty Name="customerNumber" ColumnName="customerNumber" />
+                <ScalarProperty Name="CustomerPO" ColumnName="CustomerPO" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="TotalRentAmount" ColumnName="TotalRentAmount" />
+                <ScalarProperty Name="Contract" ColumnName="Contract" />
+                <ScalarProperty Name="Insurance" ColumnName="Insurance" />
+                <ScalarProperty Name="ReservationStatusId" ColumnName="ReservationStatusId" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReservationStatus">
+            <EntityTypeMapping TypeName="eRentModel.ReservationStatu">
+              <MappingFragment StoreEntitySet="ReservationStatus">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="States">
+            <EntityTypeMapping TypeName="eRentModel.State">
+              <MappingFragment StoreEntitySet="States">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="StateCode" ColumnName="StateCode" />
+                <ScalarProperty Name="StateName" ColumnName="StateName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserLogs">
+            <EntityTypeMapping TypeName="eRentModel.UserLog">
+              <MappingFragment StoreEntitySet="UserLog">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Table_Name" ColumnName="Table_Name" />
+                <ScalarProperty Name="Table_Id" ColumnName="Table_Id" />
+                <ScalarProperty Name="Perpose" ColumnName="Perpose" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserLoginHistories">
+            <EntityTypeMapping TypeName="eRentModel.UserLoginHistory">
+              <MappingFragment StoreEntitySet="UserLoginHistory">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="LoginTime" ColumnName="LoginTime" />
+                <ScalarProperty Name="LogoutTime" ColumnName="LogoutTime" />
+                <ScalarProperty Name="Offline" ColumnName="Offline" />
+                <ScalarProperty Name="SessionId" ColumnName="SessionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRoles">
+            <EntityTypeMapping TypeName="eRentModel.UserRole">
+              <MappingFragment StoreEntitySet="UserRole">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="eRentModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="StateID" ColumnName="StateID" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="CompanyAccountInformation" ColumnName="CompanyAccountInformation" />
+                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="PasswordRecoveryCode" ColumnName="PasswordRecoveryCode" />
+                <ScalarProperty Name="AccessToken" ColumnName="AccessToken" />
+                <ScalarProperty Name="TokenIssueDate" ColumnName="TokenIssueDate" />
+                <ScalarProperty Name="TokenExpiryDate" ColumnName="TokenExpiryDate" />
+                <ScalarProperty Name="FCMDeviceToken" ColumnName="FCMDeviceToken" />
+                <ScalarProperty Name="SecuredKey" ColumnName="SecuredKey" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

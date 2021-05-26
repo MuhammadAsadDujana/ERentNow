@@ -1,0 +1,83 @@
+﻿
+@{ Layout = null; }
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>Full-Window · Signature Pad</title>
+    <style>
+
+
+        fieldset {
+            position: absolute;
+            border: 5px solid #aaa;
+            background: #aaa;
+            right: 0px;
+            bottom: 0px;
+        }
+
+        canvas {
+            outline: 0px solid #aaa;
+            background: #fff;
+        }
+
+        input[type=submit], input[type=reset] {
+            font-size: larger;
+        }
+    </style>
+    <link href="~/Content/DigitalSign/jquery.signaturepad.css" rel="stylesheet" />
+    <!--[if lt IE 9]><script src="../assets/flashcanvas.js"></script><![endif]-->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+</head>
+<body>
+    <form method="POST" action="">
+        <canvas id="myCanvas" class="pad"></canvas>
+        @*<fieldset>
+            <input id="sad" type="button" value="clear" />
+        </fieldset>*@
+
+    </form>
+
+    <script src="~/Content/DigitalSign/jquery.signaturepad.js"></script>
+    <script>
+
+        $(document).on('click', "#sad", function (e) {
+            debugger
+
+            $('form').append('<img src="' + document.getElementById("myCanvas").toDataURL() + '">')
+        });
+
+
+        (function (window) {
+            var $canvas,
+                onResize = function (event) {
+                    $canvas.attr({
+                        height: window.innerHeight,
+                        width: window.innerWidth
+                    });
+                };
+
+            $(document).ready(function () {
+                $canvas = $('canvas');
+                window.addEventListener('orientationchange', onResize, false);
+                window.addEventListener('resize', onResize, false);
+                onResize();
+
+                $('form').signaturePad({
+                    drawOnly: true,
+                    defaultAction: 'drawIt',
+                    validateFields: false,
+                    lineWidth: 0,
+                    output: null,
+                    sigNav: null,
+                    name: null,
+                    typed: null,
+                    clear: 'input[type=reset]',
+                    typeIt: null,
+                    drawIt: null,
+                    typeItDesc: null,
+                    drawItDesc: null
+                });
+            });
+        }(this));</script>
+    <script src="~/Content/DigitalSign/json2.min.js"></script>
+</body>

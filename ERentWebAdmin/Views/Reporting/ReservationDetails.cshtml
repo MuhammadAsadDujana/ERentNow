@@ -1,0 +1,216 @@
+﻿@model IEnumerable<Core.Dto.ReservationDetailsDto>
+
+@{
+    ViewBag.Title = "ReservationDetails";
+}
+
+
+<style>
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+    }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+    input:checked + .slider {
+        background-color: #2196F3;
+        /*background-color: 003399;*/
+    }
+
+    input:focus + .slider {
+        box-shadow: 0 0 1px #2196F3;
+    }
+
+    input:checked + .slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+        border-radius: 34px;
+    }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+</style>
+
+
+
+<div class="content setTop-margin">
+    <div class="container-fluid px-4">
+        <div class="content-header">
+            <div class="input-group searchGroup col-md-4">
+            </div>
+            <div class="col-md-4">
+                <h5>Current Status: @ViewBag.CurrentReservationStatus</h5>
+                <input id="ReservationId" name="ReservationId" hidden value="@ViewBag.ReservationId" />
+            </div>
+            <br /><br />
+
+            <div class="col-md-5">
+                <div class="form-group mb-4 me-4 w-50">
+                    <label>Change reservation status</label>
+
+
+
+                    <select id="StatusId" name="StatusId" class="form-control" data-placeholder="Select related state" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                        @{
+                            IEnumerable<Core.Model.ReservationStatu> lstStatus = ViewBag.ddlReservationStatusList;
+                            if (lstStatus != null)
+                            {
+                                foreach (var item in lstStatus)
+                                {
+                                    <option value="@item.Id">@item.Status</option>
+                                }
+                            }
+
+                        }
+                    </select>
+
+                    <button id="btnUpdate" type="button" class="btn flat-btn ml-2">Update</button>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="main_table">
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="card p-3">
+                        <!-- /.card-header -->
+                        <div class="card-body physicians-table table-responsive p-0">
+                            <table id="table" class="table table-hover text-center">
+                                <thead>
+                                    <tr class="bg-grey">
+                                        <th>Picture</th>
+                                        <th>Title</th>
+                                        <th>Make</th>
+                                        <th>Model</th>
+                                        <th>Quantity</th>
+                                        <th>StartDate</th>
+                                        <th>ReturnDate</th>
+                                        <th>Location</th>
+                                        <th>RentPrice</th>
+                                        @*<th>Action</th>*@
+                                    </tr>
+                                </thead>
+                                <tbody id="myTable">
+                                    @if (Model != null)
+                                    {
+                                        foreach (var item in Model)
+                                        {
+                                    <tr>
+
+                                        <td>
+                                            @if (!String.IsNullOrEmpty(item.Picture))
+                                            {
+                                                <div class="user-block user-image">
+                                                    @*<img class="img-circle img-bordered-sm" src="@Url.Content(TripleDESCryptography.Decrypt(item.ProfileImage))" height="100" />*@
+                                                    <img class="img-circle img-bordered-sm" src="@Url.Content(item.Picture)" height="100" />
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="user-block user-image">
+                                                    <img class="img-circle img-bordered-sm" src="~/Content/theme/img/profileeee.jpg" alt="User Image" />
+                                                </div>
+                                            }
+                                        </td>
+
+
+                                        <td>@item.Title</td>
+                                        <td>@item.Make</td>
+
+                                        <td>@item.Model</td>
+                                        <td>@item.Quantity</td>
+
+                                        <th>@item.StartDate</th>
+                                        <th>@item.ReturnDate</th>
+
+                                        <th>@item.Location</th>
+                                        <th>@item.RentPrice</th>
+
+                                        @*<td><a href="@item.Insurance" class="view-btn"><i class="fas fa-download"></i></a></td>
+                                        <td><a href="~/Reporting/ReservationDetails?ReservationId=@item.ReservationHdrsId" class="view-btn"><i class="fas fa-eye"></i></a></td>*@
+
+                                    </tr>
+                                        }
+                                    }
+
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div>
+        </div>
+        <!-- row -->
+    </div><!-- /.container-fluid -->
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+<script>
+
+
+
+    $(document).ready(function () {
+
+
+        $('#table').DataTable({
+            //"scrollY": "68vh",
+            //"scrollCollapse": false,
+            "searching": true,
+            //"paging": true,
+            autoWidth: true,
+            responsive: true
+        });
+    });
+
+    $('#btnUpdate').click(function () {
+        debugger;
+
+        dataAccess.reportingService.UpdateReservationStatus();
+
+    });
+
+</script>
+

@@ -1,0 +1,75 @@
+﻿@model Core.Model.ReservationHdr
+@{
+    ViewBag.Title = "CheckOut";
+}
+
+<section class="about-nav mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 login-modal">
+                <h2>Purchase Order # @Model.CustomerPO</h2><br />
+                <form id="">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label>Document Number</label>
+                            <input type="text" class="form-control" name="" value="@Model.DocumentNumber">
+                        </div>
+                        <div class="col-md-3">
+                            <label>Status</label>
+                            <input type="text" class="form-control" name="" value="@Model.ReservationStatu.Status">
+                        </div>
+                        <div class="col-md-3">
+                            <label>Total Rent Amount</label>
+                            <input type="text" class="form-control" name="" value="@Model.TotalRentAmount">
+                        </div>
+                        <div class="col-md-3">
+                            <label>Date</label>
+                            <input type="text" class="form-control" name=""  value="@Model.CreatedOn">
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>Coments</label>
+                            <textarea name="Comments" class="form-control">@Model.Comments</textarea>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <table class="table table-bordered table-hover text-center">
+                            <thead>
+                                <tr>
+                                    <th>Make</th>
+                                    <th>Model</th>
+                                    <th>Quantity</th>
+                                    <th>Start Date</th>
+                                    <th>Return Date</th>
+                                    <th>Location</th>
+                                    <th>Rent Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.ReservationDtls)
+                                {
+                                    <tr>
+                                        <td>@item.ForkliftsModel.Make</td>
+                                        <td>@item.ForkliftsModel.Model</td>
+                                        <td>@item.Quantity</td>
+                                        <td>@item.StartDate.Date.ToString("MM/dd/yyyy")</td>
+                                        <td>@item.ReturnDate.Date.ToString("MM/dd/yyyy")</td>
+                                        <td>@item.Location</td>
+                                        <td>@item.RentPrice</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    @*<div class="mx-auto">
+                        <input type="hidden" name="SecuredKey" value="@Url.RequestContext.RouteData.Values["id"]" />
+                        <center><input type="submit" class="btn btn-primary log-b pe-5  ps-5 pt-2 pb-2 mb-4 mt-4" style="border-radius: 6px;" value="Submit" /></center>
+                    </div>*@
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

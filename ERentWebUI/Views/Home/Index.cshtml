@@ -1,0 +1,76 @@
+﻿@model List<Core.Model.Forklift>
+
+@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section id="ModelGroup" class="equip-model-rap">
+    <div class="container">
+        <div class="row">
+            <h2>Equipment Models Groups</h2>
+            <div class="equip-model-rap-inner">
+                <div class="row">
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-6 lr">
+                            <div class="view view-second">
+                                <img style=" width: 100%;height:354px" src="@item.Picture" />@*~/Content/images/em1.jpg*@
+                                <div class="mask"></div>
+                                <div class="content">
+                                    <h2>@item.Description</h2>
+                                    <p>@item.Name</p> <a href="/ModelGroup/Index/@item.Id" class="info">View Models</a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="about-nav">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+                <h2>about us</h2>
+                <div class="about-nav-inner">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste.</p>
+                </div> <a class="btn btn-primary read1" href="/Home/About" role="button">Read More</a>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-12"> <img src="~/Content/images/about-bg.jpg" width="100%"> </div>
+        </div>
+    </div>
+</section>
+<script src="~/Scripts/jquery.signalR-2.4.1.min.js"></script>
+
+<script src="~/signalr/Hubs/"></script>
+<script>
+
+    $(function () {
+        $('.Home').addClass('active');
+        debugger
+        // Proxy created on the fly
+        var hub = $.connection.notifHub;
+
+        // Declare a function on the hub hub so the server can invoke it
+        hub.client.displayStatus = function () {
+            debugger
+            getData();
+        };
+
+        // Start the connection
+        $.connection.hub.start();
+        getData();
+    });
+
+
+    function getData() {
+
+        $.get("/Notif/NotifData").done(function (resp) {
+            debugger
+        }).fail(function (data) {
+            toastr["error"](data)
+        });
+    }
+</script>

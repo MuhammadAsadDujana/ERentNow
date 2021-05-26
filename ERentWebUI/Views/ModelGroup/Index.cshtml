@@ -1,0 +1,131 @@
+﻿@model Core.Dto.ForkliftDto
+
+@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<section class="about-nav model-group-bg pt-5 pb-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+                <h2>@Model.ListForklifts.Where(x => x.Id == Convert.ToInt32(Url.RequestContext.RouteData.Values["id"])).Select(x => x.Name).FirstOrDefault()</h2>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-12"> <img src="@Model.ListForkliftsModel[0].Picture" width="100%"> </div>
+            <div class="col-lg-8 col-md-8 col-sm-8 col-12">
+                <div class="model-group-inner-bg m-b-n-n">
+                    <h2>@Model.ListForkliftsModel[0].Make, @Model.ListForkliftsModel[0].Model, @Model.ListForkliftsModel[0].Capacity</h2>
+                    <p>@Model.ListForkliftsModel[0].Description</p>
+                    <div class="row">
+                        <div class="col-md-4 ms-auto me-0">
+                            <div class="row">
+                                <div class="col-4 pe-0 ps-0">
+                                    <div class="clan-tim">
+                                        <h2>Daily</h2>
+                                        <h3>@Model.ListForkliftsModel[0].PricingStandard_Daily</h3>
+                                    </div>
+                                </div>
+                                <div class="col-4 pe-0 ps-0">
+                                    <div class="clan-tim">
+                                        <h2>Weekly</h2>
+                                        <h3>@Model.ListForkliftsModel[0].PricingStandard_Weekly</h3>
+                                    </div>
+                                </div>
+                                <div class="col-4 pe-0 ps-0">
+                                    <div class="clan-tim">
+                                        <h2>Monthly</h2>
+                                        <h3>@Model.ListForkliftsModel[0].PricingStandard_Montly</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 pb-5 ms-4"><a class="btn btn-primary submit-b pb-3 pt-3" href="/ModelGroup/EquipmentDetail/@Model.ListForkliftsModel[0].Id" role="button">RESERVATION</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="about-nav mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-12">
+                <div class="mg-list">
+                    <ul>
+                        @foreach (var item in Model.ListForklifts)
+                        {
+                            <li id="@item.Id"><img style=" height: 47px; width: 47px;" src="@item.Picture"><a style="text-decoration: none;color: #191919;font-size: 19px;" href="@item.Id">@item.Name</a></li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-8 col-sm-8 col-12">
+
+                @for (int i = 0; i < Model.ListForkliftsModel.Count; i++)
+                {
+                    if (i > 0)
+                    {
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-12">
+                                <img src="@Model.ListForkliftsModel[i].Picture" width="100%">
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-12">
+                                <div class="mg-detail">
+                                    <div class="model-group-inner-bg m-b-n-n b-o-x">
+                                        <h2>@Model.ListForkliftsModel[i].Make, @Model.ListForkliftsModel[i].Model, @Model.ListForkliftsModel[i].Capacity</h2>
+                                        <p>@Model.ListForkliftsModel[i].Description</p>
+                                        <div class="row mt-5">
+                                            <div class="col-md-7 ms-auto ps-4">
+                                                <div class="row">
+                                                    <div class="col-4 pe-0 ps-0">
+                                                        <div class="clan-tim">
+                                                            <h2>Daily</h2>
+                                                            <h3>@Model.ListForkliftsModel[i].PricingStandard_Daily</h3>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-4 pe-0 ps-0">
+                                                        <div class="clan-tim">
+                                                            <h2>Weekly</h2>
+                                                            <h3>@Model.ListForkliftsModel[i].PricingStandard_Montly</h3>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-4 pe-0 ps-0">
+                                                        <div class="clan-tim">
+                                                            <h2>Monthly</h2>
+                                                            <h3>@Model.ListForkliftsModel[i].PricingStandard_Montly</h3>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5 pb-5 ms-0"><a class="btn btn-primary submit-b pb-3 pt-3 ms-4" href="/ModelGroup/EquipmentDetail/@Model.ListForkliftsModel[i].Id" role="button">RESERVATION</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="bor"></div>
+                        </div>
+
+                    }
+                }
+
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    $(function () {
+        debugger
+        var Id = '@Url.RequestContext.RouteData.Values["id"]'
+        $('#' + Id).addClass('active')
+        
+    });
+</script>
+
+

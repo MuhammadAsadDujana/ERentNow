@@ -1,0 +1,435 @@
+﻿
+@{
+    ViewBag.Title = "CreateUser";
+}
+
+
+<link href="~/Content/theme/css/select2.min.css" rel="stylesheet" />
+<link href="~/Content/theme/css/select2-bootstrap4.min.css" rel="stylesheet" />
+
+
+<style>
+    #imageUpload {
+        display: none;
+    }
+
+    #profileImage {
+        cursor: pointer;
+    }
+
+    #profile-container {
+        width: 150px;
+        height: 150px;
+        overflow: hidden;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        -ms-border-radius: 50%;
+        -o-border-radius: 50%;
+        border-radius: 50%;
+        border: 2px solid #cacaca;
+    }
+
+        #profile-container img {
+            width: 150px;
+            height: 150px;
+        }
+
+    .field-icon {
+        float: right;
+        margin-right: 8px;
+        margin-top: -29px;
+        position: relative;
+        z-index: 2;
+        cursor: pointer;
+    }
+
+    .container {
+        padding-top: 50px;
+        margin: auto;
+    }
+</style>
+
+
+
+<!-- Main content -->
+<div class="container-fluid px-4">
+    <div class="row">
+        <div class="col-md-12">
+
+
+
+            <form id="myfrm" enctype="multipart/form-data">
+                <div class="row mb-3 pb-3">
+                    <div class="col-lg-2">
+                        <div class="image_wrap">
+
+                            <div id="profile-container">
+                                <image id="setImage" src="~/Content/theme/img/profile.png" class="img-fluid" alt="" />
+                            </div>
+
+                            <input id="imageUpload" type="file"
+                                   placeholder="Photo" name="imageUpload" accept="image/*">
+
+                            <div class="profile_btn_group">
+
+                                <span id="profileImage" class="btnLink profile_upload_btn">
+                                    <i class="fas fa-camera"></i>
+                                </span>
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+                </div>
+                <!-- /.row -->
+                <div class="row">
+                    <div class="col-md-6 col-12">
+                        <div class="sign-inner">
+                            <div class="d-flex d-sin">
+                                <div class="form-group mb-4 me-4">
+                                    <label>First Name</label>
+                                    <input type="text" class="form-control" placeholder="Jhon" name="FirstName">
+                                </div>
+                                <div class="form-group mb-4  ms-4">
+                                    <label>Last Name</label>
+                                    <input type="text" class="form-control" placeholder="Smith" name="LastName">
+                                </div>
+                            </div>
+                            <div class="d-flex d-sin">
+                                <div class="form-group mb-4 me-4">
+                                    <label>E mail</label>
+                                    <input type="text" class="form-control" placeholder="user@demo.com" name="EmailAddress">
+                                </div>
+                                <div class="form-group mb-4 ms-4">
+                                    <label>Mobile Number</label>
+                                    <input type="text" class="form-control" placeholder="832-920-3269" name="MobileNumber">
+                                </div>
+                            </div>
+                            <div class="d-flex d-sin">
+                                <div class="form-group mb-4 w-100 me-5">
+                                    <label>Company Name</label>
+                                    <input type="text" class="form-control" placeholder="Texas Group .Inc" name="CompanyName">
+                                </div>
+                            </div>
+                            <div class="d-flex d-sin">
+                                <div class="form-group mb-4 w-100 me-5">
+                                    <label>Address</label>
+                                    <input type="text" class="form-control" placeholder="4828 Patterson Street" name="Address">
+                                </div>
+                            </div>
+                            <div class="d-flex d-sin">
+                                <div class="form-group mb-4 me-4">
+                                    <label>City</label>
+                                    <input type="text" class="form-control" placeholder="Houston" name="City">
+                                </div>
+                                <div class="form-group mb-4 me-4 w-50">
+                                    <label>State</label>
+
+
+
+                                    <select id="StateID" name="StateID" class="select2bs4" data-placeholder="Select related state" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                        @{
+                                            IEnumerable<Core.Model.State> lstStateList = ViewBag.ddlStateList;
+                                            if (lstStateList != null)
+                                            {
+                                                foreach (var item in lstStateList)
+                                                {
+                                                    <option value="@item.id">@item.StateName</option>
+                                                }
+                                            }
+
+                                        }
+                                    </select>
+
+                                </div>
+                                <div class="form-group mb-4 me-5">
+                                    <label>Zip Code</label>
+                                    <input type="text" class="form-control" placeholder="77032" name="ZipCode">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6  col-12">
+                        <div class="sign-inner" style="border-right: 0px;">
+                            <div class="d-flex  d-sin">
+                                <div class="form-group mb-4 me-5">
+                                    <label>Job Title</label>
+                                    <input type="text" class="form-control" placeholder="Executive" name="JobTitle">
+                                </div>
+                                <div class="form-group mb-4 me-5">
+                                    @*<label>Date of Birth</label>*@
+                                    <!-- <input type="text" class="form-control"  value="MM-DD-yyyy"  name="">  -->
+                                    @*<input type="text" class="form-control" name="DOB" id="cla">*@
+                                    <div class="input-append date">
+                                        <label>
+                                            Date of Birth
+
+                                        </label>
+                                        <input type="date" class="form-control" id="DOB" name="DOB">
+                                    </div>
+                                </div>
+
+                                <div class="form-group mb-4 me-4 w-50">
+                                    <label>Role</label>
+
+
+
+                                    <select id="RoleID" name="RoleID" class="form-control" data-placeholder="Select related state" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                        @{
+                                            IEnumerable<Core.Model.UserRole> lstRole = ViewBag.ddlUserRoleList;
+                                            if (lstRole != null)
+                                            {
+                                                foreach (var item in lstRole)
+                                                {
+                                                    <option value="@item.Id">@item.Role</option>
+                                                }
+                                            }
+
+                                        }
+                                    </select>
+
+                                </div>
+
+                            </div>
+                            <div class="d-flex d-sin me-5">
+                                <div class="form-group mb-4  w-100">
+                                    <label>Company's Account Information (Optional)</label>
+                                    <input type="text" class="form-control" placeholder="Company's Account Information (Optional)" name="CompanyAccountInformation">
+                                </div>
+                            </div>
+                            <div class="d-flex d-sin">
+                                <div class="form-group w-100  me-5">
+                                    <label>Password</label>
+                                    <input required="" id="NewPassword" type="password" value="" class="form-control password" name="NewPassword">
+                                    <span toggle="#NewPassword" class="fa fa-lg fa-eye field-icon toggle-password"></span>
+                                </div>
+                            </div>
+                            <div class="d-flex d-sin">
+                                <div class="form-group  w-100 me-5">
+                                    <label>Confirm password</label>
+                                    <input required="" id="ConfirmPassword" type="password" value="" class="form-control password" name="ConfirmPassword">
+                                    <span toggle="#ConfirmPassword" class="fa fa-lg fa-eye field-icon toggle-password"></span>
+                                </div>
+                            </div>
+                            @*<div class="form-group mt-4">
+                                <div class="form-check">
+                                    <input class="form-check-input sin-che" type="checkbox" id="in-category-19" name="category1" value="19">
+                                    <label class="form-check-label font-weight-normal" style="font-weight: 600; color:#848484;">I would like to be contacted about opening a credit account</span>. </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input sin-che" type="checkbox" id="in-category-20" name="Terms" value="20">
+                                    <label class="form-check-label font-weight-normal" style="font-weight: 600; color:#848484;">I agree to the <span><a href="/Home/TermsConditions" style="color: #18204e">Terms and Conditions</a> and the <a href="/Home/PrivacyPolicy" style="color: #18204e">Privacy Policy</a></span>. </label>
+                                </div>
+                            </div>*@
+                        <div class="mx-auto">
+                            <!-- <center><a class="btn btn-primary log-b pe-5  ps-5 pt-2 pb-2 mb-4 mt-4" style="border-radius: 6px;" href="index-login.html" role="button">SIGN UP</a></center> -->
+                            @*<center><input type="button" value="Submit" class="button-primary btn btn-primary log-b pe-5  ps-5 pt-2 pb-2 mb-4 mt-4" name="subnewtopic" id="btnSave" /></center>*@
+                            <center>    <button id="btnSave" type="submit" class="btn flat-btn ml-2">Add</button> </center>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </form>
+
+            <div class="loading">
+                @*<img id="loading-image" src="~/Content/theme/img/preloader.gif" alt="Loading..." />*@
+            </div>
+
+        </div>
+    </div>
+    <!-- /.row -->
+</div><!-- /.container-fluid -->
+<!-- /.content -->
+
+<script src="~/Content/theme/js/select2.full.min.js"></script>
+
+
+<script type="text/javascript">
+
+    //$('#txtDirectPhone').keyup(function () {
+    //    $('span.error-keyup-4').remove();
+    //    var inputVal = $(this).val();
+    //    var characterReg = /(((\(\d{3}\) ?)|(\d{3}-)|(\d{3}\.))?\d{3}(-|\.)\d{4})/g;
+    //    if (!characterReg.test(inputVal)) {
+    //        $(this).after('<span class="error error-keyup-4">Format xxx-xxx-xxxx</span>');
+    //    }
+    //});
+
+    //function validatePhoneNumber(elementValue) {
+    //    var phoneNumberPattern = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
+    //    return phoneNumberPattern.test(elementValue);
+    //}
+
+    function isNumberKey(evt) {
+        debugger;
+        var charCode = (evt.which) ? evt.which : evt.keyCode
+        if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+        return true;
+    }
+
+    //function isAlphabetsKey(evt) {
+    //    debugger;
+    //    var key = (evt.which) ? evt.which : evt.keyCode
+    //    if (!((key == 8) || (key == 32) || (key == 46) || (key >= 35 && key <= 40) || (key >= 65 && key <= 90)))
+    //        return false;
+    //    return true;
+    //}
+
+    $('#txtFirstName').keypress(function (e) {
+     //   var regex = new RegExp("^[a-zA-Z]+$");
+        var regex = new RegExp("^[a-zA-Z ]+$"); //for only space
+        var strigChar = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+        if (regex.test(strigChar)) {
+            return true;
+        }
+        return false
+    });
+
+
+
+    $('#txtLastName').keypress(function (e) {
+      //  var regex = new RegExp("^[a-zA-Z]+$");
+        var regex = new RegExp("^[a-zA-Z ]+$"); //for only space
+        var strigChar = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+        if (regex.test(strigChar)) {
+            return true;
+        }
+        return false
+    });
+
+
+
+    //to disable future dates
+    $(function () {
+        var dtToday = new Date();
+
+        var month = dtToday.getMonth() + 1;
+        var day = dtToday.getDate();
+        var year = dtToday.getFullYear();
+
+        if (month < 10)
+            month = '0' + month.toString();
+        if (day < 10)
+            day = '0' + day.toString();
+
+        var maxDate = year + '-' + month + '-' + day;
+        $('#txtJoiningDate').attr('max', maxDate);
+    });
+
+
+    $(document).ready(function () {
+        debugger;
+
+
+    });
+
+    //Initialize Select2 Elements
+    $('.select2bs4').select2({
+        theme: 'bootstrap4'
+    });
+
+    //Initialize Select2 Elements
+    $('.status').select2({
+        theme: 'bootstrap4'
+    });
+    //Initialize Select2 Elements
+    $('.language').select2({
+        theme: 'bootstrap4'
+    });
+    //Initialize Select2 Elements
+    $('.specialties').select2({
+        theme: 'bootstrap4'
+    });
+    //Initialize Select2 Elements
+    $('.diesease').select2({
+        theme: 'bootstrap4'
+    });
+
+    $("#profileImage").click(function (e) {
+
+        $("#imageUpload").click();
+    });
+
+      function fasterPreview(uploader) {
+          //      debugger;
+        if (uploader.files && uploader.files[0]) {
+            //$('#setImage').attr('src',
+            //    window.URL.createObjectURL(uploader.files[0]));
+
+            var File = uploader.files;
+            var reader = new FileReader();
+            reader.readAsDataURL(File[0]);
+
+            reader.onload = function (x) {
+                var image = new Image;
+                image.src = x.target.result;
+
+                image.onload = function () {
+                    //alert(1);
+                    //debugger;
+                    var width = this.width;
+                    var height = this.height;
+                    var type = File[0].type;
+
+
+                    if ((width <= "100" && height <= "100") && (type == "image/png" || type == "image/jpg" || type == "image/jpeg")) {
+                        $('#setImage').attr('src', x.target.result);
+                    }
+                    else {
+                        swal("Warning! invalid image!", "size must be 100x100 or less then 100x100 and type:png/jpg/jpeg");
+                        //alert(width + " " + height + " " + type);
+                    }
+
+                }
+
+
+
+            }
+        }
+    }
+
+    $("#imageUpload").change(function () {
+            //    debugger;
+        fasterPreview(this);
+
+
+    });
+
+
+    $(document).on('submit', "form", function (e) {
+        debugger;
+
+        e.preventDefault();
+        var file = $("#imageUpload").get(0).files;
+        if (file.length == 0) {
+            swal("Required", "Image is required", "warning");
+            return false;
+        }
+
+        dataAccess.userService.CreateNewUser(this);
+
+    });
+
+
+    $(".toggle-password").click(function () {
+        debugger;
+        $(this).toggleClass("fa-eye fa-eye-slash");
+        var input = $($(this).attr("toggle"));
+        if (input.attr("type") == "password") {
+            input.attr("type", "text");
+        } else {
+            input.attr("type", "password");
+        }
+    });
+
+
+</script>
+
+
+

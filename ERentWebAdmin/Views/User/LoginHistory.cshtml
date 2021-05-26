@@ -1,0 +1,130 @@
+﻿@model IEnumerable<Core.Dto.UserHistoryDto>
+
+@{
+    ViewBag.Title = "Login History";
+}
+
+<!-- Content Wrapper. Contains page content -->
+<!-- Main content -->
+
+<style>
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+    }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+    input:checked + .slider {
+        background-color: #2196F3;
+        /*background-color: 003399;*/
+    }
+
+    input:focus + .slider {
+        box-shadow: 0 0 1px #2196F3;
+    }
+
+    input:checked + .slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+        border-radius: 34px;
+    }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+</style>
+
+
+
+<div class="content setTop-margin">
+    <div class="container-fluid px-4">
+        <div class="content-header">
+            <div class="input-group searchGroup col-md-4">
+
+            </div>
+            @*<a href="#" id="markVerified" class="btn white-btn">Mark Verified</a>*@
+        </div>
+        <div class="main_table">
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="card p-3">
+                        <!-- /.card-header -->
+                        <div class="card-body physicians-table table-responsive p-0">
+                            <table id="table" class="table table-hover text-center">
+                                <thead>
+                                    <tr class="bg-grey">
+                                        
+                                        <th>User name</th>
+                                        @*<th>Last name</th>*@
+                                        <th>Email address</th>
+                                        <th>Job title</th>
+                                        <th>Level</th>
+                                        <th>Login time</th>
+                                        @*<th>Login status</th>*@
+                                    </tr>
+                                </thead>
+                                <tbody id="myTable">
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div>
+        </div>
+        <!-- row -->
+    </div><!-- /.container-fluid -->
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+<script>
+
+
+    $(document).ready(function () {
+        debugger;
+        dataAccess.userService.UserLoginHistory();
+         //  setInterval('window.location.reload()', 6000);
+    });
+
+    
+
+</script>
+

@@ -1,0 +1,182 @@
+﻿@model Core.Dto.ForkliftDto
+
+@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="about-nav model-group-bg pt-5 pb-4">
+    <div class="container">
+        <div class="row">
+        </div>
+        @{ var SelectedItem = Model.ForkliftsModel; }
+        <div class="row mt-4">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-12"> <img src="@SelectedItem.Picture" width="100%"> </div>
+            <div class="col-lg-8 col-md-8 col-sm-8 col-12">
+                <div class="model-group-inner-bg m-b-n-n">
+                    <h2>@SelectedItem.Make, @SelectedItem.Model, @SelectedItem.Capacity</h2>
+                    <p>@SelectedItem.Description</p>
+                </div>
+
+                <div class="row mt-5">
+                    <div class="col-md-3 ms-auto me-0">
+                        <div class="row">
+                            <div class="col-4 pe-0 ps-0">
+                                <div class="clan-tim">
+                                    <h2>Daily</h2>
+                                    <h3>@SelectedItem.PricingStandard_Daily</h3>
+                                </div>
+                            </div>
+                            <div class="col-4 pe-0 ps-0">
+                                <div class="clan-tim">
+                                    <h2>Weekly</h2>
+                                    <h3>@SelectedItem.PricingStandard_Weekly</h3>
+                                </div>
+                            </div>
+                            <div class="col-4 pe-0 ps-0">
+                                <div class="clan-tim">
+                                    <h2>Monthly</h2>
+                                    <h3>@SelectedItem.PricingStandard_Montly</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <p class="up-j">Purchase Price: <span>$ @SelectedItem.PurchasePrice</span></p>
+                    </div>
+                    <div class="col-md-2 pb-5">
+                        <a class="btn btn-primary submit-b pb-3 pt-3" href="mailto:" role="button">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 xmlns:xlink="http://www.w3.org/1999/xlink"
+                                 width="32px" height="24px">
+                                <image x="0px" y="0px" width="32px" height="24px" xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAYCAQAAAAxWje/AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAHdElNRQflAwwQNyw50opeAAABBklEQVQ4y92UsQ3CMBBFfyKQkJtEDEBLT58JED3KCKzACqyQnoIBEC0FA9AxACU0iERI6FEElAA2IaHjX3n6z77z+YQhIaWJUhKMSBqZH0o8UnV01lhr1VOkuYwy3UkXYlQjYi65MQcsAJh+bZ8CsCwAPrO8ItqV5va9azO6BUCICVdgRfDRHrACrkwQ4TNADDkBW3pOe48tcGKIbAAxYA/sGVjtr1kL4PWMcrzfzwp4rrIIW4ccgHKffYScb+QEFC+9wGCcU/IR8Ji1DRvnnFYARMQBgAORNV8JEH127Og7siGAB5K8mj8xV6ij5DeylvQHgJYydTSqvdAkKZKU/bxU9etavwED+CG/mamUMgAAAABJRU5ErkJggg==" />
+                            </svg>
+                        </a>
+                    </div>
+                    @*<div class="col-md-2 pb-5">
+                            <a class="btn btn-primary submit-b but-d" href="#" role="button">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     xmlns:xlink="http://www.w3.org/1999/xlink"
+                                     width="28px" height="31px">
+                                    <image x="0px" y="0px" width="28px" height="31px" xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAfCAQAAABekGWxAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAHdElNRQflAwwQMyRTZcdoAAAClklEQVQ4y43VS2hcdRTH8VNH8zBGYkjREqjPglQpSIsbRUFEFAvRlS4qRsxCTRUEQdx0oSKFKPiigqDQgqAoKF3UhaG2Edu4qEWKtRCbpqFawVQymU6YTHLvx8Xcmcy0N6P37M7/fA/n8fv/b4hcW2fEpJIEiZKfPGddc0Q+9qwSErMO+caEGQlKXmoHFhxGxZjuJm+HN5RxVEc+WHASR1yTU0eX7zDlqjzwW3y2Rt8hvItDl4OP42gbLIQJPHkp+Lcl164BFGzWLXSqmFsFC+73Ct5bA7s9m/Mzwhi219wPKKt9D+VimyxKfKjsgtArdTCE+6yo2u0dK5ZtE8IWPzvteSFsVJYaEqaVhfC9A+FWVVV3qaeoGBBKUhXsMmhBaoewH1+sCuA3qXsaRQ3hEwPYo8dfWJR6WvgSP2ay2+HPkDrc0s+yCVdYVjKo3xx2CntxvKHWu30d+LwJG8ZHwrDUvAG9tgof44RCI6pbVyiZaTi2S1zUK4QXMac/U8tUExbOOxa+wlDmmJbY1Dh+GRedwum6tLOdsjdcp6LiZpF1cmdTyKiiqh90tkxhHLeF8KhU0XphY13CbWyb1PG65F7ABf3CJB5sg/UoSty4qtXaKHptsKTq4cz7hF/N+rR2A4U+f2C09Vq9hvN63GsJR2z1OlaUcEan8JhFvHX5C7AL53S7wWQm+XP6hPdx1hlUDa9Krtl2Y1qHcIt9JrONhj1I7NdnS32feU/DVMvWalY0I7yJV/PBWvaTLTqpgbNZK1evBdZk8IsrL0l2APN68nus2z7MuL6p/N/1+Qcj7cHwAZaNG3MMLBi0wYLU5vZgeMRZkDpoRGreenfg7f8CQ+hyU/Yj2ImiE3jq/4DNNmpJarz+CvwLsSdnfgDAyCgAAAAASUVORK5CYII=" />
+                                </svg>
+                            </a>
+                        </div>*@
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="bor"></div>
+            </div>
+
+            <div class="row mt-3 mb-3">
+                <div class="col-md-1 pt-2 ms-auto me-0 qc-m">
+                    <div class="row">
+                        <label class="qc">QTY</label>
+                        @*<select class="form-select" name="Quantity" aria-label="Default select example" style="width: 85px;">
+                                <option selected></option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>*@
+
+                        <input type="number" name="Quantity" class="form-control" style="width: 85px;" />
+                    </div>
+                </div>
+                <div class="col-md-3 col-md-3-1366 mt-2">
+                    <div class="well">
+                        <div class="input-append date">
+                            <label>
+                                Start Date
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     xmlns:xlink="http://www.w3.org/1999/xlink"
+                                     width="22px" height="22px" class="me-1">
+                                    <image x="0px" y="0px" width="22px" height="22px" xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAMAAADzapwJAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAilBMVEUrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7b///+54bdhAAAALHRSTlMAJP1siOXs8+eK8Ax34FT+weSwbdBfaZCAjxtAFhlMRzpwMTYoUCIlW1izmri4XQMAAAABYktHRC3N2kE9AAAAB3RJTUUH5QMMFAcdsEMUSwAAALZJREFUGNOd0NkKwjAQheHfve46RqPGLda41Hn/51NrWxQriCcQOB/DXAxQqWqNPHmpN5qqrShPWhptOt2ear+YTku3Q8RgOBwV/CzR/ZXkK4+lJGOkbFoePDFmCjNjZjA1ZpKxVZ2nv4V5+r/wQnXxxkvnVrB2bg0r55YZb6x1sLV2C87azS+7P3jn/R5i72PYe7/L+BDCEU4hnOAYwuGv3WeRABeRCwSR84OTslMlXJPPuybXG9rXGoRxskSYAAAAAElFTkSuQmCC" />
+                                </svg>
+                            </label>
+                            <input name="StartDate" type="text" class="span2" value="" id="dpd1">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3  mt-2">
+                    <div class="well">
+                        <div class="input-append date">
+                            <label class="font-weight-bold">
+                                Return Date
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     xmlns:xlink="http://www.w3.org/1999/xlink"
+                                     width="22px" height="22px" class="me-0">
+                                    <image x="0px" y="0px" width="22px" height="22px" xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAMAAADzapwJAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAilBMVEUrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7YrS7b///+54bdhAAAALHRSTlMAJP1siOXs8+eK8Ax34FT+weSwbdBfaZCAjxtAFhlMRzpwMTYoUCIlW1izmri4XQMAAAABYktHRC3N2kE9AAAAB3RJTUUH5QMMFAcdsEMUSwAAALZJREFUGNOd0NkKwjAQheHfve46RqPGLda41Hn/51NrWxQriCcQOB/DXAxQqWqNPHmpN5qqrShPWhptOt2ear+YTku3Q8RgOBwV/CzR/ZXkK4+lJGOkbFoePDFmCjNjZjA1ZpKxVZ2nv4V5+r/wQnXxxkvnVrB2bg0r55YZb6x1sLV2C87azS+7P3jn/R5i72PYe7/L+BDCEU4hnOAYwuGv3WeRABeRCwSR84OTslMlXJPPuybXG9rXGoRxskSYAAAAAElFTkSuQmCC" />
+                                </svg>
+                            </label>
+                            <input name="ReturnDate" type="text" class="span2 ms-1" value="" id="dpd2" style="width: 170px">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 pb-5">
+                    <a class="btn btn-primary submit-b pb-3 pt-3" role="button" id="AddToResv">
+                        ADD TO RESERVATION
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="about-nav pt-5 pb-4">
+    @{ var ListForklifts = Model.ListForkliftsModel.Where(x => x.Id != ViewBag.id && x.ForkliftsId == SelectedItem.ForkliftsId).ToList(); }
+    @if (ListForklifts.Count > 0)
+    {<h2 class="text-center">OTHER MODELS </h2>}
+    <div class="container">
+        <div class="row">
+            @foreach (var item in ListForklifts)
+            {
+                <div class="col-lg-3 col-md-3 col-sm-3 col-12 mt-5">
+                    <a href="@item.Id"><img src="@item.Picture" width="100%" /></a>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<script>
+
+    $(function () {
+
+        $('#dpd1').datepicker({
+            format: 'mm-dd-yyyy'
+        });
+        $('#dpd2').datepicker({
+            format: 'mm-dd-yyyy'
+        });
+
+        $(document).on('click', "#AddToResv", function (e) {
+            debugger
+
+            if ('@Session["UserID"]' != '') {
+
+                if ($('[name= Quantity]').val().trim() == '' || $('[name= Quantity]').val() == null) {
+                    toastr["info"]('Please Enter Quantity')
+                } else if ($('[name= StartDate]').val().trim() == '' || $('[name= StartDate]').val() == null) {
+                    toastr["info"]('Please Select Start Date')
+                } else if ($('[name= ReturnDate]').val().trim() == '' || $('[name= ReturnDate]').val() == null) {
+                    toastr["info"]('Please Select Return Date')
+                } else {
+                    var CartData = {
+                        ModelID : '@Url.RequestContext.RouteData.Values["id"]',
+                        Quantity : $('[name= Quantity]').val(),
+                        StartDate : $('[name= StartDate]').val(),
+                        ReturnDate : $('[name= ReturnDate]').val()
+                    }
+                    var Cart = localStorage.getItem('@Session["UserID"]');
+                    var JsonString = JSON.stringify(CartData) + ',' + Cart;
+                    debugger
+                    localStorage.setItem('@Session["UserID"]', JsonString);
+                    toastr["success"]('Model has been added to cart')
+                }
+            } else {
+                toastr["info"]('Login required for this action')
+            }
+        })
+    });
+</script>

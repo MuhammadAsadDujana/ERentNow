@@ -1,0 +1,247 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5D9ED544-19F1-41DD-B6B7-6AE524FE1A7E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Core</RootNamespace>
+    <AssemblyName>Core</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.JsonWebTokens, Version=6.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.JsonWebTokens.6.8.0\lib\net461\Microsoft.IdentityModel.JsonWebTokens.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Logging, Version=6.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Logging.6.8.0\lib\net461\Microsoft.IdentityModel.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Tokens, Version=6.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Tokens.6.8.0\lib\net461\Microsoft.IdentityModel.Tokens.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=6.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.6.8.0\lib\net461\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime" />
+    <Reference Include="System.Runtime.InteropServices" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Threading.Thread" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\Communication\Email.cs" />
+    <Compile Include="Common\Cryptography\Encrypt_Dycrypt.cs" />
+    <Compile Include="Common\Helper\Common.cs" />
+    <Compile Include="Common\Helper\ConstantMessages.cs" />
+    <Compile Include="Common\Helper\Encryption.cs" />
+    <Compile Include="Common\Helper\TokkenManager.cs" />
+    <Compile Include="Common\Miscellaneous\DataSourceRequest.cs" />
+    <Compile Include="Common\Miscellaneous\ExtensionMethods.cs" />
+    <Compile Include="Common\Miscellaneous\Helper.cs" />
+    <Compile Include="Common\Miscellaneous\RandomNumber.cs" />
+    <Compile Include="Common\Miscellaneous\Validations.cs" />
+    <Compile Include="Dto\ChangePassViewModel.cs" />
+    <Compile Include="Dto\CompanySetupPageDto.cs" />
+    <Compile Include="Dto\ExtrasViewModel.cs" />
+    <Compile Include="Dto\ForkliftDto.cs" />
+    <Compile Include="Dto\ForkliftModelViewModel.cs" />
+    <Compile Include="Dto\ForkliftsModelChargesDto.cs" />
+    <Compile Include="Dto\NotificationDto.cs" />
+    <Compile Include="Dto\OrderHistoryDto.cs" />
+    <Compile Include="Dto\ReservationDetailsDto.cs" />
+    <Compile Include="Dto\ReservationDto.cs" />
+    <Compile Include="Dto\ReservationForkliftsModelDto.cs" />
+    <Compile Include="Dto\ReservationHeaderDto.cs" />
+    <Compile Include="Dto\UserDto.cs" />
+    <Compile Include="Dto\UserHistoryDto.cs" />
+    <Compile Include="Model\CartModel.cs" />
+    <Compile Include="Model\CompanySetupPage.cs">
+      <DependentUpon>eRentEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\equipmentDetail.cs">
+      <DependentUpon>eRentEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\eRentEntities.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>eRentEntities.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\eRentEntities.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>eRentEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\eRentEntities.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>eRentEntities.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Model\feesDetail.cs">
+      <DependentUpon>eRentEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Forklift.cs">
+      <DependentUpon>eRentEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ForkliftsModel.cs">
+      <DependentUpon>eRentEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ForkliftsModelCharge.cs">
+      <DependentUpon>eRentEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ForkliftsModelTransportation.cs">
+      <DependentUpon>eRentEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Mapping_ForkliftsModelCharges_Reservation.cs">
+      <DependentUpon>eRentEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Mapping_ForkliftsModelTransportation_Reservation.cs">
+      <DependentUpon>eRentEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Mapping_PricingNationalAccount_Reservation.cs">
+      <DependentUpon>eRentEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Mapping_PricingStandard_Reservation.cs">
+      <DependentUpon>eRentEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\RequestModel.cs" />
+    <Compile Include="Model\Notification.cs">
+      <DependentUpon>eRentEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Reservation.cs">
+      <DependentUpon>eRentEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ReservationAPI.cs">
+      <DependentUpon>eRentEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ReservationDtl.cs">
+      <DependentUpon>eRentEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ReservationHdr.cs">
+      <DependentUpon>eRentEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ReservationModel.cs" />
+    <Compile Include="Model\ReservationStatu.cs">
+      <DependentUpon>eRentEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ResponseModel.cs" />
+    <Compile Include="Model\State.cs">
+      <DependentUpon>eRentEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\User.cs">
+      <DependentUpon>eRentEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\UserLog.cs">
+      <DependentUpon>eRentEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\UserLoginHistory.cs">
+      <DependentUpon>eRentEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\UserModel.cs" />
+    <Compile Include="Model\UserRole.cs">
+      <DependentUpon>eRentEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Billing\BillingService.cs" />
+    <Compile Include="Services\ForkliftService\ForklistService.cs" />
+    <Compile Include="Services\ForkliftService\IForklistService.cs" />
+    <Compile Include="Services\ReservationService.cs" />
+    <Compile Include="Services\NotificationService\NotificationService.cs" />
+    <Compile Include="Services\ReportingService\ReportingService.cs" />
+    <Compile Include="Services\UserService\IUserService.cs" />
+    <Compile Include="Services\UserService\UserService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <EntityDeploy Include="Model\eRentEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>eRentEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Model\eRentEntities.edmx.diagram">
+      <DependentUpon>eRentEntities.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Model\eRentEntities.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>eRentEntities.edmx</DependentUpon>
+      <LastGenOutput>eRentEntities.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model\eRentEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>eRentEntities.edmx</DependentUpon>
+      <LastGenOutput>eRentEntities.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
